@@ -105,11 +105,6 @@ export default function ContactForm({ selectedService, preselectedService, onCon
         
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#101F35] border border-[#00D5FF]/30 text-xs font-semibold text-[#00D5FF]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Direct Commercial Inquiry</span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Let&apos;s Build Something <span className="gradient-text">Exceptional.</span>
           </h2>

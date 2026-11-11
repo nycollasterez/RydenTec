@@ -253,14 +253,86 @@
     }
   ],
   "analytics": {
-    "visits": 4,
+    "visits": 5,
     "uniqueIps": {
-      "::1": 4
+      "::1": 5
     },
     "whatsappClicks": 0,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "pricing_plan_click_business",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:02:15.532Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:01:16.866Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:01:15.823Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:29.367Z"
+      },
+      {
+        "event": "showcase_concept_switch_restaurant",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:22.725Z"
+      },
+      {
+        "event": "showcase_concept_switch_professional",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:20.132Z"
+      },
+      {
+        "event": "showcase_concept_switch_beauty-wellness",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:19.213Z"
+      },
+      {
+        "event": "showcase_concept_switch_home-services",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:15.605Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:08.029Z"
+      },
+      {
+        "event": "showcase_device_toggle_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:57:59.049Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:54:52.921Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:54:28.193Z"
+      },
       {
         "event": "showcase_device_toggle_desktop",
         "path": "/",

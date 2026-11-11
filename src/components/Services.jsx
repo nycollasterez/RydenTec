@@ -109,11 +109,6 @@ export default function Services({ onSelectService }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 lg:mb-20">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#101F35] border border-[#087CFF]/30 text-xs font-semibold text-[#00D5FF]">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Core Capabilities</span>
-          </div>
-          
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Everything Your Business Needs to <span className="gradient-text">Go Digital.</span>
           </h2>

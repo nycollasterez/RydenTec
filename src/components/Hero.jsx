@@ -33,12 +33,6 @@ export default function Hero({ onStartProject, onExploreWork }) {
           {/* Left Column: Confident Typography & Positioning */}
           <div className="lg:col-span-6 text-center lg:text-left space-y-8">
             
-            {/* Subtle Brand Pill */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#101F35]/80 border border-[#087CFF]/30 text-xs font-medium text-[#00D5FF] backdrop-blur-md shadow-sm">
-              <span className="flex h-2 w-2 rounded-full bg-[#00D5FF] animate-ping"></span>
-              <span>International Technology &amp; Digital Solutions</span>
-            </div>
-
             {/* Hero Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
               We Build{' '}

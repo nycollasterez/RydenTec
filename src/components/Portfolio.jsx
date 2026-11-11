@@ -38,11 +38,6 @@ export default function Portfolio({ projects = [], onQuoteClick }) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#101F35] border border-[#087CFF]/30 text-xs font-semibold text-[#00D5FF]">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Curated Portfolio</span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Great Ideas Deserve <span className="gradient-text">Great Execution.</span>
           </h2>
