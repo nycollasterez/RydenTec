@@ -108,10 +108,14 @@ export default function Portfolio({ projects = [], onQuoteClick }) {
                     </div>
                   </div>
 
-                  {/* Concept Project Badge */}
+                  {/* Concept or Live Client Project Badge */}
                   <div className="absolute top-3 right-3 z-10">
-                    <span className="px-2.5 py-1 rounded-md text-[10px] font-bold bg-[#07111F]/90 text-amber-300 border border-amber-400/30 shadow-md">
-                      {project.badge || (project.isConcept ? 'Concept Project' : 'Client Project')}
+                    <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold shadow-md border ${
+                      project.isConcept === false
+                        ? 'bg-emerald-950/90 text-emerald-300 border-emerald-500/50'
+                        : 'bg-[#07111F]/90 text-amber-300 border-amber-400/30'
+                    }`}>
+                      {project.badge || (project.isConcept ? 'Concept Project' : 'Live Client Project')}
                     </span>
                   </div>
                 </div>
@@ -230,6 +234,19 @@ export default function Portfolio({ projects = [], onQuoteClick }) {
 
             {/* Modal Actions */}
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-4 border-t border-white/10">
+              {selectedProject.liveUrl && (
+                <a
+                  href={selectedProject.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg flex items-center justify-center space-x-2 transition-colors"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>Visit Live Client Site</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+
               <button
                 onClick={() => {
                   setSelectedProject(null);

@@ -19,16 +19,17 @@ const DEFAULT_PORTFOLIO = [
     title: 'Honorato Barber Shop & Grooming Lounge',
     industry: 'Barbershop & Men\'s Grooming',
     category: 'Website Development',
-    isConcept: true,
+    isConcept: false,
     published: true,
     order: 1,
-    shortDescription: 'High-converting digital presence and online booking experience with modern dark aesthetic and mobile-first scheduling.',
-    fullDescription: 'Custom high-performance web experience engineered for premium barbershops. Includes automated appointment scheduling, service packages showcase, team barber portfolios, and direct WhatsApp VIP booking integration.',
+    liveUrl: 'https://www.honoratobarbershop.com.br/',
+    shortDescription: 'Official high-converting digital presence and online booking experience with modern dark aesthetic and mobile-first scheduling.',
+    fullDescription: 'Custom high-performance web experience engineered for Honorato Barber Shop (live at honoratobarbershop.com.br). Features automated appointment scheduling, service packages showcase, team barber portfolios, and direct WhatsApp VIP booking integration.',
     desktopPreview: '/portfolio/barbershop-desktop.png',
     mobilePreview: '/portfolio/barbershop-mobile.png',
-    badge: 'Concept Project',
-    techStack: ['React', 'Tailwind CSS', 'Booking API', 'SEO Optimized'],
-    metrics: ['Sub-second load speed', 'Mobile-first layout', 'Direct booking workflow']
+    badge: 'Live Client Project',
+    techStack: ['Responsive UX', 'Direct Booking', 'WhatsApp VIP Integration', 'SEO Optimized'],
+    metrics: ['Sub-second load speed', 'Mobile-first layout', 'Live Production Site']
   },
   {
     id: 'proj-02',
