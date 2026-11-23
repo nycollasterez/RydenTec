@@ -15,14 +15,14 @@ export default function Navbar({ onQuoteClick }) {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Our Work', href: '#portfolio' },
-    { name: 'Showcase', href: '#showcase' },
-    { name: 'How We Work', href: '#how-we-work' },
-    { name: 'Why Us', href: '#why-us' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Início', href: '#home' },
+    { name: 'Serviços', href: '#services' },
+    { name: 'Nosso Trabalho', href: '#portfolio' },
+    { name: 'Vitrine', href: '#showcase' },
+    { name: 'Como Trabalhamos', href: '#how-we-work' },
+    { name: 'Por que a Ryden', href: '#why-us' },
+    { name: 'Preços', href: '#pricing' },
+    { name: 'Contato', href: '#contact' },
   ];
 
   const handleLinkClick = (href) => {
@@ -84,7 +84,7 @@ export default function Navbar({ onQuoteClick }) {
               <span className="absolute inset-0 bg-gradient-to-r from-[#087CFF] to-[#00D5FF] transition-all duration-300 group-hover:opacity-100 opacity-90"></span>
               <span className="relative flex items-center space-x-2 px-5 py-2.5 rounded-[11px] bg-[#07111F] transition-all duration-200 group-hover:bg-opacity-0">
                 <span className="text-sm font-semibold text-white tracking-wide">
-                  Get a Free Quote
+                  Orçamento Gratuito
                 </span>
                 <ArrowRight className="w-4 h-4 text-[#00D5FF] transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white" />
               </span>
@@ -130,7 +130,7 @@ export default function Navbar({ onQuoteClick }) {
                 }}
                 className="w-full flex items-center justify-center space-x-2 py-3 px-5 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-semibold shadow-lg shadow-[#087CFF]/30 active:scale-98 transition-all"
               >
-                <span>Get a Free Quote</span>
+                <span>Orçamento Gratuito</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

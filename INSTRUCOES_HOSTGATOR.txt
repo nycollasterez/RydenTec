@@ -1,0 +1,37 @@
+====================================================================
+  SOFISTICASA MÓVEIS PLANEJADOS — GUIA FÁCIL (SEM NODE.JS)
+====================================================================
+
+SIM! O sistema agora roda 100% NATIVO EM PHP / APACHE!
+NÃO PRECISA CONFIGURAR NODE.JS NO CPANEL!
+NÃO PRECISA DO "SETUP NODE.JS APP"!
+
+O erro 403 anterior acontecia porque a HostGator bloqueava pastas sem index.
+Agora todos os arquivos estão na raiz da pasta e com suporte nativo a PHP!
+
+--------------------------------------------------------------------
+PASSO A PASSO (EM MENOS DE 1 MINUTO)
+--------------------------------------------------------------------
+
+1. NO CPANEL DA HOSTGATOR:
+   - Abra o "Gerenciador de Arquivos" (File Manager).
+   - Entre na pasta "public_html".
+   - Se já criou uma pasta antes com erro, pode apagar o conteúdo dela ou criar uma nova pasta (ex: "sofisticasa").
+   - Entre dentro da sua pasta (ex: public_html/sofisticasa).
+   - Clique em "Carregar" (Upload) no topo.
+   - Envie o arquivo: site-sofisticasa-hostgator.zip
+   - Clique com o botão direito nele e escolha "Extrair" (Extract).
+
+2. PRONTO! SÓ ISSO!
+   Basta abrir no navegador:
+   - Site Principal:     https://seudominio.com.br/sofisticasa/
+   - Galeria Projetos:   https://seudominio.com.br/sofisticasa/projetos
+   - Orçamento Online:   https://seudominio.com.br/sofisticasa/orcamento
+   - Painel Admin:       https://seudominio.com.br/sofisticasa/admin
+                         (Usuário: admin | Senha: admin123)
+   - Portal Marceneiro:  https://seudominio.com.br/sofisticasa/marceneiro
+                         (Carlos: carlos | Senha: marceneiro123)
+                         (Rodrigo: rodrigo | Senha: marceneiro123)
+
+Zero complicação, sem Node.js e sem Erro 403!
+====================================================================

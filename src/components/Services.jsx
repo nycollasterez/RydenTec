@@ -1,186 +1,283 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Globe, 
   Cpu, 
   Smartphone, 
   Sparkles, 
+  ShoppingCart,
   ArrowRight, 
   Check, 
-  Layers, 
-  Database, 
-  Bot, 
-  Zap, 
-  Code2, 
-  Workflow 
+  Users, 
+  Package, 
+  PhoneCall,
+  MessageCircle
 } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
-export default function Services({ onSelectService }) {
+const WA_NUMBER = '5511989022184';
+
+export default function Services({ onSelectService, whatsappNumber }) {
+  const [selectedId, setSelectedId] = useState('loja-virtual');
+
   const services = [
     {
       id: 'website-development',
-      serviceKey: 'New Website',
-      number: '01',
-      title: 'Website Development',
-      tagline: 'Websites That Make a Lasting Impression.',
-      description: 'Fast, responsive, professionally designed websites built to showcase your business and turn visitors into potential customers.',
+      serviceKey: 'Novo Site Institucional',
+      tabLabel: 'Site Institucional',
+      title: 'Sites Institucionais e Comerciais',
+      tagline: 'Presença Digital de Alto Nível Que Transmite Confiança e Credibilidade.',
       icon: Globe,
-      features: [
-        'Business Websites',
-        'High-Converting Landing Pages',
-        'Responsive Web Design',
-        'Website Redesign',
-        'SEO Foundations',
-        'Appointment & Contact Integrations'
+      targetAudience: 'Empresas, prestadores de serviços, clínicas, escritórios e negócios que precisam de uma vitrine profissional no Google para fechar mais contratos.',
+      deliverables: [
+        'Site moderno e 100% responsivo (computador, tablet e celular)',
+        'Estrutura voltada para conversão de visitantes em contatos',
+        'Configuração completa de SEO para ranquear nas buscas do Google',
+        'Botão e formulário integrados direto ao seu WhatsApp',
+        'Carregamento instantâneo e hospedagem segura em nuvem'
       ],
-      cta: 'Build My Website',
-      accentColor: 'from-[#087CFF] to-[#00D5FF]'
+      nextStep: 'Analisamos o perfil do seu público-alvo, criamos a arquitetura do conteúdo e entregamos a primeira versão para revisão.',
+      ctaText: 'Quero um site institucional',
+      waMsg: 'Olá! Vi o site da RydenTec e gostaria de um orçamento para um site institucional.'
+    },
+    {
+      id: 'loja-virtual',
+      serviceKey: 'Loja Virtual',
+      tabLabel: 'Loja Virtual',
+      title: 'Lojas Virtuais e E-commerce',
+      tagline: 'Venda Seus Produtos 24 Horas por Dia com Simplicidade e Rapidez.',
+      icon: ShoppingCart,
+      targetAudience: 'Marcas de produtos físicos ou digitais, distribuidoras e comércios que desejam vender online com catálogo moderno, checkout ágil e integração de pagamentos.',
+      deliverables: [
+        'Catálogo de produtos organizado com filtros rápidos de busca',
+        'Checkout simplificado com Pix, cartão de crédito e boleto',
+        'Cálculo automático de frete (Correios e transportadoras)',
+        'Painel simples para gerenciar pedidos, clientes e estoque',
+        'Integração com WhatsApp para suporte e recuperação de vendas'
+      ],
+      nextStep: 'Mapeamos o volume do seu catálogo e métodos de pagamento preferidos para estruturar a loja sob medida para sua operação.',
+      ctaText: 'Quero uma loja virtual',
+      waMsg: 'Olá! Vi o site da RydenTec e gostaria de um orçamento para uma loja virtual.'
+    },
+    {
+      id: 'landing-pages',
+      serviceKey: 'Landing Page',
+      tabLabel: 'Landing Page',
+      title: 'Landing Pages de Alta Conversão',
+      tagline: 'Páginas Focadas em Converter Cliques de Anúncios em Clientes Reais.',
+      icon: Sparkles,
+      targetAudience: 'Negócios que investem ou querem investir em anúncios no Google Ads, Instagram ou Facebook e precisam de retorno máximo por clique.',
+      deliverables: [
+        'Página única focada em uma oferta irresistível e clara',
+        'Copywriting persuasivo e design orientado a vendas',
+        'Gatilhos visuais, prova social e chamadas para ação diretas',
+        'Carregamento em menos de 1 segundo para não perder tráfego pago',
+        'Integração com Meta Pixel e Google Analytics para mensuração'
+      ],
+      nextStep: 'Apresentamos a proposta visual da página com foco na sua campanha ativa ou próximo lançamento.',
+      ctaText: 'Quero uma landing page',
+      waMsg: 'Olá! Vi o site da RydenTec e gostaria de um orçamento para uma landing page de alta conversão.'
     },
     {
       id: 'custom-software',
-      serviceKey: 'Custom Software',
-      number: '02',
-      title: 'Custom Software',
-      tagline: 'Software Built Around the Way You Work.',
-      description: 'Custom digital systems designed to streamline workflows, organize information, and simplify everyday business operations.',
+      serviceKey: 'Software Sob Medida',
+      tabLabel: 'Software Sob Medida',
+      title: 'Sistemas e Softwares Personalizados',
+      tagline: 'Sistemas Construídos Exatamente em Torno do Seu Fluxo de Trabalho.',
       icon: Cpu,
-      features: [
-        'Management Systems',
-        'CRM Solutions',
-        'Scheduling Platforms',
-        'Inventory Management',
-        'Business Dashboards',
-        'Custom Integrations'
+      targetAudience: 'Empresas que gastam tempo excessivo em planilhas manuais ou necessitam de um sistema interno para agendamentos, estoque, vendas ou controle operacional.',
+      deliverables: [
+        'Painéis administrativos (dashboards) com relatórios em tempo real',
+        'Módulos de gestão comercial, CRM de clientes e emissão de propostas',
+        'Controle de permissões por usuário e equipe',
+        'Integrações com APIs externas, gateways e bancos de dados',
+        'Automações internas que eliminam tarefas operacionais repetitivas'
       ],
-      cta: 'Discuss Your Software',
-      accentColor: 'from-[#00D5FF] to-[#087CFF]'
-    },
-    {
-      id: 'app-development',
-      serviceKey: 'Web or Mobile App',
-      number: '03',
-      title: 'App Development',
-      tagline: 'Your Ideas, Built for the Digital World.',
-      description: 'Thoughtfully designed applications and digital platforms created around real user needs.',
-      icon: Smartphone,
-      features: [
-        'Web Applications',
-        'Customer Portals',
-        'Progressive Web Apps',
-        'Internal Business Applications',
-        'Mobile App Projects',
-        'Platform Development'
-      ],
-      cta: 'Start an App Project',
-      accentColor: 'from-[#087CFF] to-[#00D5FF]'
+      nextStep: 'Realizamos uma sessão de diagnóstico técnico para desenhar o diagrama da arquitetura e apresentar o cronograma do sistema.',
+      ctaText: 'Quero um software sob medida',
+      waMsg: 'Olá! Vi o site da RydenTec e gostaria de conversar sobre um software sob medida para minha empresa.'
     },
     {
       id: 'ai-automation',
-      serviceKey: 'AI & Automation',
-      number: '04',
-      title: 'AI & Automation',
-      tagline: 'Work Smarter With Intelligent Technology.',
-      description: 'Automate repetitive tasks, connect business tools, and explore practical ways to use AI in your daily operations.',
-      icon: Sparkles,
-      features: [
-        'Workflow Automation',
-        'AI-Powered Assistants',
-        'Customer Service Automation',
-        'Data Integrations',
-        'Process Optimization',
-        'Custom AI Solutions'
+      serviceKey: 'IA & Automação',
+      tabLabel: 'IA & Automação',
+      title: 'Automação Comercial e Inteligência Artificial',
+      tagline: 'Atenda Clientes Automaticamente e Conecte Suas Ferramentas com IA.',
+      icon: MessageCircle,
+      targetAudience: 'Empresas que recebem grande volume de mensagens no WhatsApp e redes sociais e desejam triagem automática inteligente com agendamento instantâneo.',
+      deliverables: [
+        'Atendentes virtuais com IA treinados com as dúvidas frequentes da sua empresa',
+        'Triagem automática e envio de propostas 24 horas por dia no WhatsApp',
+        'Sincronização imediata com agendas (Google Calendar) e CRMs',
+        'Notificações automáticas para sua equipe quando um lead quente solicitar atendimento',
+        'Eliminação de gargalos no tempo de primeira resposta ao cliente'
       ],
-      cta: 'Explore Automation',
-      accentColor: 'from-[#00D5FF] to-[#087CFF]'
+      nextStep: 'Mapeamos suas perguntas mais comuns e desenhamos o fluxo de atendimento automatizado no WhatsApp.',
+      ctaText: 'Quero automação com IA',
+      waMsg: 'Olá! Vi o site da RydenTec e gostaria de um orçamento para automação de atendimento com IA.'
     }
   ];
 
-  const handleCtaClick = (service) => {
-    trackEvent(`service_click_${service.id}`);
-    onSelectService(service.serviceKey);
+  const currentService = services.find(s => s.id === selectedId) || services[0];
+  const activeWaNumber = (whatsappNumber || WA_NUMBER).replace(/[^0-9]/g, '');
+
+  const handleOpenWhatsApp = (service) => {
+    trackEvent(`service_wa_click_${service.id}`);
+    const url = `https://wa.me/${activeWaNumber}?text=${encodeURIComponent(service.waMsg)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleSelectService = (s) => {
+    setSelectedId(s.id);
+    trackEvent(`service_tab_select_${s.id}`);
   };
 
   return (
-    <section id="services" className="py-24 lg:py-32 relative bg-[#07111F] overflow-hidden">
-      {/* Background Decorative Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#087CFF]/8 blur-[160px] pointer-events-none rounded-full"></div>
+    <section id="services" className="py-24 lg:py-32 relative bg-[#07111F] overflow-hidden border-t border-white/5">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#087CFF]/10 blur-[160px] pointer-events-none rounded-full"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 lg:mb-20">
+        {/* Cabeçalho da Seção */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Everything Your Business Needs to <span className="gradient-text">Go Digital.</span>
+            O Que a RydenTec Pode <span className="gradient-text">Construir Para Você?</span>
           </h2>
-          
           <p className="text-base sm:text-lg text-[#A8B5C7] leading-relaxed">
-            Powerful digital solutions designed to simplify operations, strengthen your online presence, and support your next stage of growth.
+            Selecione uma das soluções abaixo para conferir para quem é indicado, o que entregamos e o próximo passo para o seu projeto.
           </p>
         </div>
 
-        {/* 4 Interactive Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={service.id}
-                className="group relative rounded-2xl bg-[#101F35]/70 border border-white/10 p-8 sm:p-10 transition-all duration-300 hover:border-[#087CFF]/50 hover:bg-[#101F35]/95 hover:shadow-2xl hover:shadow-[#087CFF]/15 backdrop-blur-xl flex flex-col justify-between"
-              >
-                {/* Top Subtle Number & Icon */}
+        {/* 
+          BARRA DE SELEÇÃO INTERATIVA COM TRAÇO CIANO DESLIZANTE
+        */}
+        <div className="relative mb-10 overflow-x-auto pb-4 scrollbar-none">
+          <div className="flex sm:justify-center items-center gap-2 sm:gap-3 min-w-max px-2">
+            {services.map((service) => {
+              const Icon = service.icon;
+              const isSelected = service.id === selectedId;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => handleSelectService(service)}
+                  className={`relative px-4 sm:px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center gap-2.5 cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#101F35] text-white border border-[#00D5FF]/60 shadow-lg shadow-[#00D5FF]/15'
+                      : 'bg-[#0B1730]/80 text-[#A8B5C7] hover:text-white border border-white/5 hover:border-white/15'
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-[#00D5FF]' : 'text-[#A8B5C7]'}`} />
+                  <span>{service.tabLabel}</span>
+
+                  {/* Traço ciano deslizante no botão ativo */}
+                  {isSelected && (
+                    <span className="absolute -bottom-1.5 left-4 right-4 h-0.5 bg-gradient-to-r from-[#087CFF] via-[#00D5FF] to-[#087CFF] rounded-full shadow-[0_0_8px_#00D5FF]"></span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 
+          CARD DETALHADO DO SERVIÇO SELECIONADO
+          Revela exatamente as 3 informações: Para quem é, O que pode ser entregue e Próximo passo
+        */}
+        <div className="max-w-5xl mx-auto rounded-3xl bg-[#0B1730]/95 border border-[#087CFF]/30 p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all duration-300">
+          
+          {/* Luz guia ciano no topo do card */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00D5FF] to-transparent shadow-[0_0_12px_#00D5FF]"></div>
+
+          <div className="space-y-8">
+            
+            {/* Título & Tagline do Serviço */}
+            <div className="border-b border-white/10 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span className="text-xs font-mono font-bold text-[#00D5FF] uppercase tracking-wider">
+                  Solução Especializada
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
+                  {currentService.title}
+                </h3>
+                <p className="text-sm font-medium text-[#087CFF] mt-1">
+                  {currentService.tagline}
+                </p>
+              </div>
+
+              {/* Botão Principal com abertura do WhatsApp e mensagem específica */}
+              <div className="flex-shrink-0">
+                <button
+                  onClick={() => handleOpenWhatsApp(currentService)}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-bold text-sm shadow-lg shadow-[#087CFF]/30 hover:scale-105 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>{currentService.ctaText}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* As 3 Informações Reais Solicitadas */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              
+              {/* 1. Para quem é o serviço */}
+              <div className="rounded-2xl bg-[#101F35]/70 border border-white/5 p-6 space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0B1730] border border-[#087CFF]/30 flex items-center justify-center text-[#00D5FF]">
+                  <Users className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-white tracking-tight">
+                  Para quem é o serviço
+                </h4>
+                <p className="text-xs sm:text-sm text-[#A8B5C7] leading-relaxed">
+                  {currentService.targetAudience}
+                </p>
+              </div>
+
+              {/* 2. O que pode ser entregue */}
+              <div className="rounded-2xl bg-[#101F35]/70 border border-white/5 p-6 space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0B1730] border border-[#087CFF]/30 flex items-center justify-center text-[#00D5FF]">
+                  <Package className="w-5 h-5" />
+                </div>
+                <h4 className="text-base font-bold text-white tracking-tight">
+                  O que está incluído
+                </h4>
+                <ul className="space-y-2 text-xs sm:text-sm text-[#A8B5C7]">
+                  {currentService.deliverables.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-[#00D5FF] flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 3. Qual é o próximo passo */}
+              <div className="rounded-2xl bg-[#101F35]/70 border border-white/5 p-6 space-y-3 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-[#0B1730] border border-[#087CFF]/20 flex items-center justify-center text-[#00D5FF] group-hover:scale-105 group-hover:border-[#00D5FF]/50 transition-all duration-300 shadow-inner">
-                      <Icon className="w-7 h-7 text-[#00D5FF]" />
-                    </div>
-                    <span className="text-2xl font-black font-mono text-[#A8B5C7]/30 group-hover:text-[#00D5FF]/40 transition-colors">
-                      {service.number}
-                    </span>
+                  <div className="w-10 h-10 rounded-xl bg-[#0B1730] border border-[#087CFF]/30 flex items-center justify-center text-[#00D5FF]">
+                    <PhoneCall className="w-5 h-5" />
                   </div>
-
-                  {/* Title & Tagline */}
-                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-[#00D5FF] transition-colors">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-sm font-semibold text-[#087CFF] mt-1.5 mb-3">
-                    {service.tagline}
+                  <h4 className="text-base font-bold text-white tracking-tight mt-3 mb-2">
+                    Qual é o próximo passo
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#A8B5C7] leading-relaxed">
+                    {currentService.nextStep}
                   </p>
-
-                  {/* Main Description */}
-                  <p className="text-sm text-[#A8B5C7] leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Feature Checklist */}
-                  <div className="space-y-2.5 pt-4 border-t border-white/5 mb-8">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2.5 text-xs sm:text-sm text-white/90">
-                        <div className="w-4 h-4 rounded-full bg-[#087CFF]/15 flex items-center justify-center text-[#00D5FF] flex-shrink-0">
-                          <Check className="w-3 h-3" />
-                        </div>
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
-                {/* Card CTA Action */}
-                <div>
+                <div className="pt-4 border-t border-white/5">
                   <button
-                    onClick={() => handleCtaClick(service)}
-                    className="w-full py-3.5 px-5 rounded-xl bg-[#0B1730] border border-white/10 group-hover:border-[#087CFF] group-hover:bg-gradient-to-r group-hover:from-[#087CFF] group-hover:to-[#00D5FF] text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 shadow-sm"
+                    onClick={() => handleOpenWhatsApp(currentService)}
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <span>{service.cta}</span>
-                    <ArrowRight className="w-4 h-4 text-[#00D5FF] group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
+                    <span>Falar no WhatsApp Agora</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
-
-                {/* Top Corner Subtle Glow on Hover */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#087CFF]/10 to-transparent rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
-            );
-          })}
+
+            </div>
+
+          </div>
         </div>
 
       </div>

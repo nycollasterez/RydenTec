@@ -19,8 +19,8 @@ export default function ContactForm({ selectedService, preselectedService, onCon
     businessName: '',
     email: '',
     phone: '',
-    service: 'New Website',
-    budget: '$1,000–$2,500',
+    service: 'Site Institucional',
+    budget: 'Sob Consulta',
     projectDetails: '',
     honeypot: '' // Spam trap
   });
@@ -39,20 +39,20 @@ export default function ContactForm({ selectedService, preselectedService, onCon
   }, [selectedService, preselectedService]);
 
   const serviceOptions = [
-    'New Website',
-    'Website Redesign',
-    'Custom Software',
-    'Web or Mobile App',
-    'AI & Automation',
-    'Not Sure Yet'
+    'Site Institucional',
+    'Loja Virtual',
+    'Landing Page',
+    'Software Sob Medida',
+    'IA & Automação Comercial',
+    'Outro / A Definir'
   ];
 
   const budgetOptions = [
-    'Under $1,000',
-    '$1,000–$2,500',
-    '$2,500–$5,000',
-    '$5,000+',
-    'Let\'s Discuss'
+    'Até R$ 3.000',
+    'R$ 3.000 – R$ 6.000',
+    'R$ 6.000 – R$ 12.000',
+    'Acima de R$ 12.000',
+    'Sob Consulta'
   ];
 
   const handleSubmit = async (e) => {
@@ -83,7 +83,7 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
       trackEvent('lead_submission_success');
     } catch (err) {
-      setErrorMsg(err.message || 'Unable to submit your quote request. Please try again.');
+      setErrorMsg(err.message || 'Não foi possível enviar sua solicitação. Por favor, tente novamente ou fale pelo WhatsApp.');
     } finally {
       setLoading(false);
     }
@@ -91,8 +91,8 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
   const handleWhatsAppFollowup = () => {
     trackEvent('post_lead_whatsapp_click');
-    const cleanNumber = (whatsappNumber || '+13058902184').replace(/[^0-9]/g, '');
-    const text = encodeURIComponent(`Hi! I just submitted a quote request for ${formData.fullName} regarding a ${formData.service} project.`);
+    const cleanNumber = (whatsappNumber || '5511989022184').replace(/[^0-9]/g, '');
+    const text = encodeURIComponent(`Olá! Acabei de enviar uma solicitação pelo site para ${formData.fullName} sobre um projeto de ${formData.service}.`);
     window.open(`https://wa.me/${cleanNumber}?text=${text}`, '_blank');
   };
 
@@ -106,11 +106,11 @@ export default function ContactForm({ selectedService, preselectedService, onCon
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Let&apos;s Build Something <span className="gradient-text">Exceptional.</span>
+            Vamos Criar Algo <span className="gradient-text">Excepcional.</span>
           </h2>
           
           <p className="text-base sm:text-lg text-[#A8B5C7] max-w-2xl mx-auto leading-relaxed">
-            Tell us what you have in mind. We&apos;ll help you explore the right digital solution for your business.
+            Conte-nos sobre a sua visão. Ajudaremos você a construir a solução digital perfeita para os objetivos da sua empresa.
           </p>
         </div>
 
@@ -123,17 +123,17 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
             <div className="space-y-2">
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Inquiry Received Securely
+                Solicitação Recebida com Sucesso
               </h3>
               <p className="text-sm sm:text-base text-[#A8B5C7] max-w-xl mx-auto">
-                Thank you, <span className="text-white font-semibold">{submittedLead.fullName}</span>. Your project brief has been logged into our management system. A RydenTec specialist will review your requirements and provide a detailed proposal within 24 business hours.
+                Obrigado, <span className="text-white font-semibold">{submittedLead.fullName}</span>. Os detalhes do seu projeto foram registrados. Um especialista da RydenTec analisará suas necessidades e enviará uma proposta personalizada em até 24 horas úteis.
               </p>
             </div>
 
             {/* Next Steps: WhatsApp or Schedule Consultation */}
             <div className="pt-6 border-t border-white/10 space-y-4">
               <div className="text-xs uppercase tracking-wider text-[#00D5FF] font-semibold">
-                Want to expedite discussion right now?
+                Deseja agilizar a conversa agora mesmo?
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -142,7 +142,7 @@ export default function ContactForm({ selectedService, preselectedService, onCon
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/20 transition-all"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Chat on WhatsApp</span>
+                  <span>Falar no WhatsApp</span>
                 </button>
 
                 <button
@@ -150,7 +150,7 @@ export default function ContactForm({ selectedService, preselectedService, onCon
                   className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#101F35] hover:bg-[#132540] border border-white/10 text-white font-semibold text-sm flex items-center justify-center space-x-2 transition-all"
                 >
                   <Calendar className="w-4 h-4 text-[#00D5FF]" />
-                  <span>Schedule Consultation Call</span>
+                  <span>Agendar Consultoria Gratuita</span>
                 </button>
               </div>
             </div>
@@ -163,15 +163,15 @@ export default function ContactForm({ selectedService, preselectedService, onCon
                   businessName: '',
                   email: '',
                   phone: '',
-                  service: 'New Website',
-                  budget: '$1,000–$2,500',
+                  service: 'Site Institucional',
+                  budget: 'Sob Consulta',
                   projectDetails: '',
                   honeypot: ''
                 });
               }}
               className="text-xs text-[#A8B5C7] hover:text-white underline pt-4"
             >
-              Submit Another Inquiry
+              Enviar Outra Solicitação
             </button>
           </div>
         ) : (
@@ -202,12 +202,12 @@ export default function ContactForm({ selectedService, preselectedService, onCon
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2">
-                  Full Name <span className="text-[#00D5FF]">*</span>
+                  Nome Completo <span className="text-[#00D5FF]">*</span>
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Alexander Stone"
+                  placeholder="Ex: João da Silva"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   className="w-full px-4 py-3.5 rounded-xl bg-[#101F35] border border-white/10 text-white placeholder-[#A8B5C7]/50 focus:outline-none focus:border-[#087CFF] focus:ring-1 focus:ring-[#087CFF] transition-all text-sm"
@@ -216,11 +216,11 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
               <div>
                 <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2">
-                  Business / Company Name
+                  Empresa / Negócio
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Stone Architecture LLC"
+                  placeholder="Nome da sua empresa"
                   value={formData.businessName}
                   onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                   className="w-full px-4 py-3.5 rounded-xl bg-[#101F35] border border-white/10 text-white placeholder-[#A8B5C7]/50 focus:outline-none focus:border-[#087CFF] focus:ring-1 focus:ring-[#087CFF] transition-all text-sm"
@@ -232,12 +232,12 @@ export default function ContactForm({ selectedService, preselectedService, onCon
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2">
-                  Email Address <span className="text-[#00D5FF]">*</span>
+                  E-mail <span className="text-[#00D5FF]">*</span>
                 </label>
                 <input
                   type="email"
                   required
-                  placeholder="alexander@company.com"
+                  placeholder="seu@email.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3.5 rounded-xl bg-[#101F35] border border-white/10 text-white placeholder-[#A8B5C7]/50 focus:outline-none focus:border-[#087CFF] focus:ring-1 focus:ring-[#087CFF] transition-all text-sm"
@@ -246,11 +246,11 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
               <div>
                 <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2">
-                  Phone Number <span className="text-[#A8B5C7] text-[11px] font-normal">(Optional)</span>
+                  Telefone / WhatsApp <span className="text-[#A8B5C7] text-[11px] font-normal">(Opcional)</span>
                 </label>
                 <input
                   type="tel"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="(DDD) 99999-9999"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-4 py-3.5 rounded-xl bg-[#101F35] border border-white/10 text-white placeholder-[#A8B5C7]/50 focus:outline-none focus:border-[#087CFF] focus:ring-1 focus:ring-[#087CFF] transition-all text-sm"
@@ -258,10 +258,10 @@ export default function ContactForm({ selectedService, preselectedService, onCon
               </div>
             </div>
 
-            {/* Row 3: What Do You Need? (Service Selection) */}
+            {/* Row 3: Qual é a sua necessidade? */}
             <div>
               <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2.5">
-                What Do You Need? <span className="text-[#00D5FF]">*</span>
+                Qual é a sua necessidade? <span className="text-[#00D5FF]">*</span>
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                 {serviceOptions.map((opt) => (
@@ -281,10 +281,10 @@ export default function ContactForm({ selectedService, preselectedService, onCon
               </div>
             </div>
 
-            {/* Row 4: Optional Project Budget */}
+            {/* Row 4: Faixa de Investimento Estimada */}
             <div>
               <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2.5">
-                Estimated Project Budget <span className="text-[#A8B5C7] text-[11px] font-normal">(Optional)</span>
+                Faixa de Investimento Estimada <span className="text-[#A8B5C7] text-[11px] font-normal">(Opcional)</span>
               </label>
               <div className="flex flex-wrap gap-2">
                 {budgetOptions.map((b) => (
@@ -307,12 +307,12 @@ export default function ContactForm({ selectedService, preselectedService, onCon
             {/* Row 5: Project Details */}
             <div>
               <label className="block text-xs font-semibold text-white/90 uppercase tracking-wider mb-2">
-                Project Details <span className="text-[#00D5FF]">*</span>
+                Detalhes do Projeto <span className="text-[#00D5FF]">*</span>
               </label>
               <textarea
                 required
                 rows={4}
-                placeholder="Tell us about your business, current website or software challenges, desired features, or key objectives..."
+                placeholder="Conte-nos sobre sua empresa, o que deseja para o novo site ou software, funcionalidades necessárias e seus objetivos..."
                 value={formData.projectDetails}
                 onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
                 className="w-full px-4 py-3.5 rounded-xl bg-[#101F35] border border-white/10 text-white placeholder-[#A8B5C7]/50 focus:outline-none focus:border-[#087CFF] focus:ring-1 focus:ring-[#087CFF] transition-all text-sm resize-none"
@@ -323,7 +323,7 @@ export default function ContactForm({ selectedService, preselectedService, onCon
             <div className="text-[11px] text-[#A8B5C7] flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <span>
-                Your privacy is respected. Information submitted is kept confidential and strictly used to prepare your project proposal.
+                Sua privacidade é respeitada. As informações enviadas são estritamente confidenciais e usadas apenas para preparar sua proposta.
               </span>
             </div>
 
@@ -335,10 +335,10 @@ export default function ContactForm({ selectedService, preselectedService, onCon
                 className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-bold text-base shadow-lg shadow-[#087CFF]/35 hover:shadow-[#087CFF]/50 hover:scale-[1.01] active:scale-98 transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 {loading ? (
-                  <span>Processing Inquiry...</span>
+                  <span>Processando Solicitação...</span>
                 ) : (
                   <>
-                    <span>Get My Free Quote</span>
+                    <span>Solicitar Meu Orçamento Gratuito</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}

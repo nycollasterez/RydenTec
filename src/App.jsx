@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ScrollDrivenHero from './components/ScrollDrivenHero';
 import Services from './components/Services';
 import Showcase from './components/Showcase';
 import Portfolio from './components/Portfolio';
@@ -14,6 +15,7 @@ import ConsultationModal from './components/ConsultationModal';
 import LegalModals from './components/LegalModals';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
+import PreviewPage from './components/PreviewPage';
 import { fetchSettings, fetchPortfolio, trackEvent } from './services/api';
 
 export default function App() {
@@ -34,11 +36,16 @@ export default function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [activeLegalModal, setActiveLegalModal] = useState(null); // 'privacy' | 'terms' | null
 
+  const [isPreviewRoute, setIsPreviewRoute] = useState(
+    window.location.pathname === '/preview'
+  );
+
   // Check URL path on mount & listen to popstate
   useEffect(() => {
     const checkPath = () => {
       const isPathAdmin = window.location.pathname.startsWith('/admin') || window.location.hash === '#admin';
       setIsAdminRoute(isPathAdmin);
+      setIsPreviewRoute(window.location.pathname === '/preview');
     };
 
     checkPath();
@@ -95,6 +102,16 @@ export default function App() {
     }
   };
 
+  // If visitor navigated to /preview
+  if (isPreviewRoute) {
+    return (
+      <PreviewPage
+        settings={settings}
+        portfolio={portfolio}
+      />
+    );
+  }
+
   // If visitor navigated to /admin
   if (isAdminRoute) {
     if (!adminToken) {
@@ -127,12 +144,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#07111F] text-white selection:bg-[#087CFF] selection:text-white">
       {/* Sticky Header with Official RydenTec Logo & Navigation */}
-      <Navbar onQuoteClick={() => scrollToContact('New Website')} />
+      <Navbar onQuoteClick={() => scrollToContact('Novo Site')} />
 
-      {/* Hero Section with 3D Mockup & Floating Indicators */}
+      {/* Abertura Automática da RydenTec (Cena de Construção Digital em ~3 segundos) */}
       <Hero
-        onStartProject={() => scrollToContact('New Website')}
-        onExploreWork={scrollToPortfolio}
+        onStartProject={() => scrollToContact('Novo Site')}
+        onExploreServices={() => {
+          const el = document.getElementById('services');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
       />
 
       {/* Services Section with 4 Interactive Cards */}

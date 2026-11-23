@@ -5,8 +5,8 @@ import { trackEvent } from '../services/api';
 export default function WhatsAppFloating({ whatsappNumber, whatsappMessage }) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const defaultNumber = '+1 (305) 890-2184';
-  const defaultMsg = 'Hi! I found RydenTec online and I\'m interested in discussing a digital project for my business.';
+  const defaultNumber = '+55 (11) 98902-2184';
+  const defaultMsg = 'Olá! Vi o site da RydenTec e gostaria de solicitar um orçamento para o meu negócio.';
 
   const targetNumber = (whatsappNumber || defaultNumber).replace(/[^0-9]/g, '');
   const messageText = whatsappMessage || defaultMsg;
@@ -23,7 +23,7 @@ export default function WhatsAppFloating({ whatsappNumber, whatsappMessage }) {
       {showTooltip && (
         <div className="mr-3 hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-[#0B1730] border border-emerald-500/30 text-white text-xs shadow-xl backdrop-blur-md animate-fadeIn">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Chat directly with RydenTec</span>
+          <span>Fale diretamente com a RydenTec</span>
           <button 
             onClick={(e) => {
               e.stopPropagation();
@@ -41,7 +41,7 @@ export default function WhatsAppFloating({ whatsappNumber, whatsappMessage }) {
         onClick={handleClick}
         onMouseEnter={() => setShowTooltip(true)}
         className="relative p-3.5 sm:p-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl shadow-emerald-500/40 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
-        aria-label="Chat on WhatsApp with RydenTec"
+        aria-label="Falar no WhatsApp com a RydenTec"
       >
         {/* Subtle Ping Ring */}
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">

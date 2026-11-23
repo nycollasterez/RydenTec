@@ -6,67 +6,67 @@
   },
   "settings": {
     "brandName": "RydenTec",
-    "tagline": "Technology That Moves Your Business Forward.",
+    "tagline": "Tecnologia Que Impulsiona Seu Negócio.",
     "officialDomain": "rydentec.com",
     "secondaryDomain": "rydentec.online",
-    "heroHeadline": "We Build Digital Experiences That Move Businesses Forward.",
-    "heroSupporting": "From high-performance websites to custom software and intelligent automation, we turn ambitious ideas into powerful digital solutions.",
-    "contactEmail": "hello@rydentec.com",
-    "whatsappNumber": "+1 (305) 890-2184",
-    "whatsappMessage": "Hi! I found RydenTec online and I'm interested in discussing a digital project for my business.",
-    "schedulingUrl": "https://calendly.com/rydentec/consultation",
+    "heroHeadline": "Criamos Experiências Digitais Que Fazem Seu Negócio Crescer.",
+    "heroSupporting": "De sites de alta conversão a softwares sob medida e automação inteligente, transformamos ideias em resultados digitais concretos.",
+    "contactEmail": "contato@rydentec.com",
+    "whatsappNumber": "+55 (11) 98902-2184",
+    "whatsappMessage": "Olá! Vi o site da RydenTec e gostaria de conversar sobre um projeto digital para o meu negócio.",
+    "schedulingUrl": "https://calendly.com/rydentec/consultoria",
     "metaPixelId": "",
     "gaMeasurementId": "",
     "pricing": {
       "starter": {
-        "title": "STARTER WEBSITE",
-        "price": "$799",
-        "startingNote": "Starting at",
-        "description": "Ideal for small businesses establishing a professional online presence.",
+        "title": "SITE STARTER",
+        "price": "Sob consulta",
+        "startingNote": "",
+        "description": "Ideal para pequenas empresas que desejam presença online profissional e de alto impacto.",
         "features": [
-          "Responsive Website",
-          "Up to 3 Pages",
-          "Contact Form",
-          "Mobile Optimization",
-          "Basic SEO Setup",
-          "Social Media Integration"
+          "Site Responsivo e Moderno",
+          "Até 3 Páginas Principais",
+          "Formulário & Integração WhatsApp",
+          "Otimização Total para Mobile",
+          "Configuração de SEO Google",
+          "Integração com Redes Sociais"
         ],
-        "cta": "Get Started",
+        "cta": "Pedir Orçamento",
         "popular": false
       },
       "business": {
-        "title": "BUSINESS WEBSITE",
-        "price": "$1,499",
-        "startingNote": "Starting at",
-        "description": "For businesses that need a more complete digital presence.",
+        "title": "SITE BUSINESS",
+        "price": "Sob consulta",
+        "startingNote": "",
+        "description": "Para empresas que necessitam de presença digital robusta, completa e orientada a vendas.",
         "features": [
-          "Up to 7 Pages",
-          "Custom Responsive Design",
-          "Lead Capture Forms",
-          "Analytics Integration",
-          "SEO Foundations",
-          "Conversion-Focused Structure"
+          "Até 7 Páginas Personalizadas",
+          "Design Exclusivo de Alta Conversão",
+          "Captura de Leads e Formulários",
+          "Integração com Google Analytics",
+          "Fundamentos Avançados de SEO",
+          "Estrutura Otimizada para Tráfego Pago"
         ],
-        "cta": "Request a Proposal",
+        "cta": "Pedir Orçamento",
         "popular": true
       },
       "custom": {
-        "title": "CUSTOM SOLUTIONS",
-        "price": "Custom Quote",
+        "title": "SOLUÇÕES SOB MEDIDA",
+        "price": "Sob consulta",
         "startingNote": "",
-        "description": "For complex websites, applications, software, and automation projects.",
+        "description": "Para plataformas, lojas virtuais, sistemas web, portais e automações comerciais com IA.",
         "features": [
-          "Custom Project Scope",
-          "Advanced Features",
-          "Business Integrations",
-          "Scalable Architecture",
-          "Tailored User Experience",
-          "Custom Development"
+          "Escopo 100% Personalizado",
+          "Painéis e Dashboards Exclusivos",
+          "Integrações de Sistemas e APIs",
+          "Arquitetura Escalável em Nuvem",
+          "Experiência do Usuário Dedicada",
+          "Desenvolvimento e Suporte Especializado"
         ],
-        "cta": "Let's Talk",
+        "cta": "Fale com a Gente",
         "popular": false
       },
-      "disclaimer": "Final pricing depends on project requirements, features, and scope. Hosting, third-party subscriptions, and ongoing maintenance may be quoted separately."
+      "disclaimer": "O valor final depende dos requisitos específicos, funcionalidades e escopo de cada projeto. Hospedagem e serviços de terceiros são orçados com total transparência."
     }
   },
   "portfolio": [
@@ -253,14 +253,224 @@
     }
   ],
   "analytics": {
-    "visits": 5,
+    "visits": 26,
     "uniqueIps": {
-      "::1": 5
+      "::1": 26
     },
     "whatsappClicks": 0,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T13:45:43.603Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T13:44:26.183Z"
+      },
+      {
+        "event": "service_tab_select_ai-automation",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:44.624Z"
+      },
+      {
+        "event": "service_tab_select_custom-software",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:23.909Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:19.057Z"
+      },
+      {
+        "event": "service_tab_select_loja-virtual",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:14.973Z"
+      },
+      {
+        "event": "service_tab_select_website-development",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:05.729Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:50:23.819Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:26.880Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:24.090Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:23.059Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:27:25.965Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:27:20.721Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:34.118Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:32.184Z"
+      },
+      {
+        "event": "showcase_concept_switch_restaurant",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:29.314Z"
+      },
+      {
+        "event": "showcase_concept_switch_professional",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:28.135Z"
+      },
+      {
+        "event": "showcase_concept_switch_beauty-wellness",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:26.179Z"
+      },
+      {
+        "event": "showcase_concept_switch_home-services",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:17.310Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:14.035Z"
+      },
+      {
+        "event": "showcase_cta_click",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:25:03.702Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:24:19.973Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:24:08.168Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:23:54.944Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:29.706Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:20.248Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:16.343Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:11.270Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:13:07.611Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:06:47.571Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:50.667Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:46.291Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/preview",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:29.578Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T08:43:39.133Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:46:23.469Z"
+      },
       {
         "event": "pricing_plan_click_business",
         "path": "/",

@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api/admin/
+Disallow: /preview
 
 Sitemap: https://rydentec.com/sitemap.xml

@@ -33,72 +33,72 @@ export default function Showcase({ onBuildYours }) {
   // Interactive mini-states for concepts
   const [selectedServiceIndex, setSelectedServiceIndex] = useState(0);
   const [autoTier, setAutoTier] = useState('ceramic');
-  const [homeSqFt, setHomeSqFt] = useState(1800);
+  const [homeSqFt, setHomeSqFt] = useState(150);
   const [restaurantGuests, setRestaurantGuests] = useState(2);
 
   const concepts = [
     {
       id: 'barbershop',
-      label: 'Barbershop & Grooming',
+      label: 'Barbearia & Grooming',
       icon: Scissors,
       brandName: 'Honorato Barber Shop',
-      tagline: 'Precision Cuts & Luxury Grooming Lounge',
+      tagline: 'Cortes Precisos e Experiência de Barbearia Premium',
       accentColor: '#00D5FF',
       isLiveClient: true,
       liveUrl: 'https://www.honoratobarbershop.com.br/',
       services: [
-        { name: 'Executive Master Cut & Hot Towel', price: '$45', time: '40 min' },
-        { name: 'Beard Sculpting & Ozone Steam', price: '$35', time: '30 min' },
-        { name: 'The Complete Ryden Protocol', price: '$75', time: '60 min' }
+        { name: 'Corte Master Ryden & Toalha Quente', price: 'R$ 80', time: '40 min' },
+        { name: 'Design de Barba & Vapor de Ozônio', price: 'R$ 55', time: '30 min' },
+        { name: 'Combo Completo Cabelo e Barba', price: 'R$ 130', time: '60 min' }
       ]
     },
     {
       id: 'detailing',
-      label: 'Auto Detailing & Care',
+      label: 'Estética Automotiva',
       icon: Car,
-      brandName: 'Apex Ceramic & Paint Defense',
-      tagline: 'Paint Correction & Certified Ceramic Studio',
+      brandName: 'Apex Proteção Cerâmica & Detalhamento',
+      tagline: 'Correção de Pintura e Vitrificação Cerâmica Certificada',
       accentColor: '#087CFF',
       isLiveClient: false,
       tiers: {
-        stage1: { name: 'Gloss Enhancement', price: '$399', dur: '1 Day', warranty: '1 Year' },
-        ceramic: { name: 'Level 2 Ceramic Shield', price: '$899', dur: '2 Days', warranty: '5 Years' },
-        ppf: { name: 'Full Front PPF Armor', price: '$1,799', dur: '3 Days', warranty: '10 Years' }
+        stage1: { name: 'Polimento Técnico & Brilho', price: 'R$ 890', dur: '1 Dia', warranty: '1 Ano' },
+        ceramic: { name: 'Vitrificação Cerâmica Pro', price: 'R$ 1.850', dur: '2 Dias', warranty: '3 Anos' },
+        ppf: { name: 'Proteção Frontal PPF Regenerativo', price: 'R$ 3.800', dur: '3 Dias', warranty: '5 Anos' }
       }
     },
     {
       id: 'home-services',
-      label: 'Home Remodeling',
+      label: 'Reformas & Arquitetura',
       icon: Home,
-      brandName: 'Vanguard Contracting & Design',
-      tagline: 'Architectural Remodeling & Fine Construction',
+      brandName: 'Vanguard Engenharia & Reformas',
+      tagline: 'Reformas Residenciais de Alto Padrão e Arquitetura',
       accentColor: '#00D5FF',
       isLiveClient: false
     },
     {
       id: 'beauty-wellness',
-      label: 'Beauty & Wellness',
+      label: 'Estética & Saúde',
       icon: Heart,
-      brandName: 'Aura Aesthetics & Medical Spa',
-      tagline: 'Advanced Dermatology & Rejuvenation Therapies',
+      brandName: 'Clínica Aura Estética Avançada',
+      tagline: 'Tratamentos Dermatológicos e Procedimentos Faciais',
       accentColor: '#087CFF',
       isLiveClient: false
     },
     {
       id: 'professional',
-      label: 'Professional Advisory',
+      label: 'Consultoria & Finanças',
       icon: Briefcase,
-      brandName: 'Sterling Financial & M&A Group',
-      tagline: 'Strategic Corporate Wealth & Transaction Advisory',
+      brandName: 'Sterling Consultoria Empresarial',
+      tagline: 'Planejamento Estratégico e Gestão Corporativa',
       accentColor: '#00D5FF',
       isLiveClient: false
     },
     {
       id: 'restaurant',
-      label: 'Artisan Restaurant',
+      label: 'Gastronomia & Restaurante',
       icon: UtensilsCrossed,
-      brandName: 'L\'Atelier Modern Hearth',
-      tagline: 'Contemporary Seasonal Wood-Fired Cuisine',
+      brandName: 'L\'Atelier Cucina & Fogo',
+      tagline: 'Culinária Contemporânea Autoral com Ingredientes Locais',
       accentColor: '#087CFF',
       isLiveClient: false
     }
@@ -127,11 +127,11 @@ export default function Showcase({ onBuildYours }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Your Website Should <span className="gradient-text">Work as Hard as You Do.</span>
+            Seu Site Deve Trabalhar <span className="gradient-text">Tão Duro Quanto Você.</span>
           </h2>
 
           <p className="text-base sm:text-lg text-[#A8B5C7] leading-relaxed">
-            Your website is more than an online presence. It&apos;s where first impressions become opportunities.
+            Mais do que uma simples presença online: é onde a primeira impressão se transforma em novos clientes para o seu negócio.
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export default function Showcase({ onBuildYours }) {
                 <span>{concept.label}</span>
                 {concept.isLiveClient && (
                   <span className="ml-1 px-1.5 py-0.2 rounded-full bg-emerald-400/20 text-emerald-300 text-[9px] font-bold">
-                    LIVE
+                    NO AR
                   </span>
                 )}
               </button>
@@ -169,15 +169,15 @@ export default function Showcase({ onBuildYours }) {
           {currentConcept.isLiveClient ? (
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span className="font-bold">Verified Live Client Website:</span>
+              <span className="font-bold">Site Real no Ar:</span>
               <span className="text-white font-mono text-[11px]">honoratobarbershop.com.br</span>
             </div>
           ) : (
-            <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[#101F35] border border-amber-500/20 text-xs text-amber-300">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-[#101F35] border border-amber-500/20 text-xs text-amber-300">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-              <span className="font-medium">Concept Demonstration</span>
+              <span className="font-medium">Demonstração de Conceito</span>
               <span className="text-white/40">•</span>
-              <span className="text-[#A8B5C7] text-[11px]">Crafted to show RydenTec responsive architecture &amp; conversion logic</span>
+              <span className="text-[#A8B5C7] text-[11px]">Projetado para demonstrar arquitetura responsiva e conversão</span>
             </div>
           )}
 
@@ -194,7 +194,7 @@ export default function Showcase({ onBuildYours }) {
                       : 'text-[#A8B5C7] hover:text-white'
                   }`}
                 >
-                  Live Website
+                  Site Real no Ar
                 </button>
                 <button
                   onClick={() => setBarbershopViewMode('funnel')}
@@ -204,7 +204,7 @@ export default function Showcase({ onBuildYours }) {
                       : 'text-[#A8B5C7] hover:text-white'
                   }`}
                 >
-                  Booking Architecture
+                  Fluxo de Conversão
                 </button>
               </div>
             )}
@@ -219,7 +219,7 @@ export default function Showcase({ onBuildYours }) {
                 }`}
               >
                 <Monitor className="w-3.5 h-3.5" />
-                <span>Desktop View</span>
+                <span>Computador</span>
               </button>
 
               <button
@@ -231,7 +231,7 @@ export default function Showcase({ onBuildYours }) {
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                <span>Mobile View</span>
+                <span>Celular</span>
               </button>
             </div>
           </div>
@@ -272,13 +272,13 @@ export default function Showcase({ onBuildYours }) {
                       rel="noreferrer"
                       className="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 font-semibold flex items-center space-x-1 transition-colors"
                     >
-                      <span>Open Live Site</span>
+                      <span>Abrir Site Real</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   ) : (
                     <div className="text-[#00D5FF] font-semibold flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">SSL Secure</span>
+                      <span className="hidden sm:inline">Conexão Segura SSL</span>
                     </div>
                   )}
                 </div>
@@ -299,19 +299,19 @@ export default function Showcase({ onBuildYours }) {
                   <div className="p-6 sm:p-10 min-h-[480px] bg-gradient-to-b from-[#0B1730] to-[#07111F] space-y-8 animate-fadeIn">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
                       <div>
-                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">Premium Grooming &amp; Lounge</div>
+                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">Barbearia &amp; Estética Premium</div>
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Honorato Barber Shop</h3>
-                        <p className="text-sm text-[#A8B5C7] mt-1">Handcrafted cuts, hot towels &amp; bespoke beard treatments.</p>
+                        <p className="text-sm text-[#A8B5C7] mt-1">Cortes precisos, toalhas aquecidas e tratamento de barba exclusivo.</p>
                       </div>
                       <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 w-fit">
                         <Clock className="w-3.5 h-3.5" />
-                        <span>Today&apos;s Open Slots: 4 Available</span>
+                        <span>Horários Hoje: 4 Disponíveis</span>
                       </div>
                     </div>
 
                     {/* Interactive Service Card Selector */}
                     <div>
-                      <div className="text-xs font-semibold text-[#A8B5C7] uppercase tracking-wider mb-3">Select Desired Service:</div>
+                      <div className="text-xs font-semibold text-[#A8B5C7] uppercase tracking-wider mb-3">Selecione o Serviço:</div>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {currentConcept.services.map((srv, idx) => (
                           <div
@@ -339,17 +339,19 @@ export default function Showcase({ onBuildYours }) {
                     {/* Booking Flow Simulation */}
                     <div className="p-4 rounded-xl bg-[#101F35]/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                       <div className="text-left w-full sm:w-auto">
-                        <div className="text-xs text-[#A8B5C7]">Selected Service:</div>
+                        <div className="text-xs text-[#A8B5C7]">Serviço Escolhido:</div>
                         <div className="text-sm font-bold text-white">
                           {currentConcept.services[selectedServiceIndex]?.name} ({currentConcept.services[selectedServiceIndex]?.price})
                         </div>
                       </div>
-                      <button 
-                        onClick={() => alert(`Simulated booking for ${currentConcept.services[selectedServiceIndex]?.name}! In the live production site at honoratobarbershop.com.br, this connects directly to WhatsApp VIP booking.`)}
-                        className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-semibold text-xs shadow-md hover:opacity-95"
+                      <a 
+                        href="https://www.honoratobarbershop.com.br/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-semibold text-xs shadow-md hover:opacity-95 text-center"
                       >
-                        Reserve Appointment Slot
-                      </button>
+                        Agendar Horário
+                      </a>
                     </div>
                   </div>
                 )
@@ -362,19 +364,19 @@ export default function Showcase({ onBuildYours }) {
                     <div className="space-y-8 animate-fadeIn">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
                         <div>
-                          <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Exotic &amp; Luxury Vehicle Protection</div>
-                          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Apex Ceramic &amp; Paint Defense</h3>
-                          <p className="text-sm text-[#A8B5C7] mt-1">Ceramic coatings, self-healing PPF &amp; multi-stage paint correction.</p>
+                          <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Proteção para Veículos Premium</div>
+                          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Apex Proteção Cerâmica &amp; Detalhamento</h3>
+                          <p className="text-sm text-[#A8B5C7] mt-1">Vitrificação cerâmica, PPF auto-regenerativo e correção de pintura especializada.</p>
                         </div>
                         <div className="flex items-center space-x-1 text-amber-400 text-xs font-semibold">
                           <Star className="w-4 h-4 fill-amber-400" />
-                          <span>5.0 Star Rated (140+ Verified Reviews)</span>
+                          <span>Avaliação 5.0 (Mais de 140 avaliações)</span>
                         </div>
                       </div>
 
                       {/* Interactive Package Switcher */}
                       <div>
-                        <div className="text-xs font-semibold text-[#A8B5C7] uppercase tracking-wider mb-3">Choose Protection Package:</div>
+                        <div className="text-xs font-semibold text-[#A8B5C7] uppercase tracking-wider mb-3">Escolha o Pacote de Proteção:</div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                           {Object.entries(currentConcept.tiers).map(([key, item]) => (
                             <div
@@ -391,8 +393,8 @@ export default function Showcase({ onBuildYours }) {
                                 <span className="text-sm font-extrabold text-[#00D5FF]">{item.price}</span>
                               </div>
                               <div className="text-xs text-[#A8B5C7] mt-2 space-y-1">
-                                <div>Duration: {item.dur}</div>
-                                <div className="text-emerald-400 font-semibold">{item.warranty} Warranty</div>
+                                <div>Duração: {item.dur}</div>
+                                <div className="text-emerald-400 font-semibold">Garantia de {item.warranty}</div>
                               </div>
                             </div>
                           ))}
@@ -401,16 +403,16 @@ export default function Showcase({ onBuildYours }) {
 
                       <div className="p-4 rounded-xl bg-[#101F35]/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div>
-                          <div className="text-xs text-[#A8B5C7]">Vehicle Estimate:</div>
+                          <div className="text-xs text-[#A8B5C7]">Estimativa para o Veículo:</div>
                           <div className="text-sm font-bold text-white">
-                            {currentConcept.tiers[autoTier]?.name} • Starting at {currentConcept.tiers[autoTier]?.price}
+                            {currentConcept.tiers[autoTier]?.name} • A partir de {currentConcept.tiers[autoTier]?.price}
                           </div>
                         </div>
                         <button 
-                          onClick={() => alert(`Simulated quote for ${currentConcept.tiers[autoTier]?.name}! With RydenTec, clients receive real-time vehicle make/model calculation forms.`)}
+                          onClick={onBuildYours}
                           className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-semibold text-xs shadow-md"
                         >
-                          Request Vehicle Quote
+                          Solicitar Orçamento
                         </button>
                       </div>
                     </div>
@@ -420,37 +422,37 @@ export default function Showcase({ onBuildYours }) {
                   {activeConcept === 'home-services' && (
                     <div className="space-y-6 animate-fadeIn">
                       <div className="border-b border-white/10 pb-4">
-                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">General Contractor &amp; Architectural Builder</div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Vanguard Contracting &amp; Design</h3>
-                        <p className="text-sm text-[#A8B5C7] mt-1">Luxury residential additions, custom kitchens &amp; structural engineering.</p>
+                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">Engenharia Civil &amp; Reformas de Alto Padrão</div>
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Vanguard Engenharia &amp; Reformas</h3>
+                        <p className="text-sm text-[#A8B5C7] mt-1">Projetos arquitetônicos residenciais, reformas estruturais e acabamentos nobres.</p>
                       </div>
 
                       {/* Interactive Estimator Slider */}
                       <div className="p-6 rounded-xl bg-[#101F35]/70 border border-white/10 space-y-4">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold text-white">Project Square Footage</span>
-                          <span className="text-base font-bold text-[#00D5FF] font-mono">{homeSqFt} sq. ft.</span>
+                          <span className="text-sm font-semibold text-white">Metragem do Projeto (Área)</span>
+                          <span className="text-base font-bold text-[#00D5FF] font-mono">{homeSqFt} m²</span>
                         </div>
                         <input 
                           type="range" 
-                          min="500" 
-                          max="5000" 
-                          step="100" 
+                          min="50" 
+                          max="500" 
+                          step="10" 
                           value={homeSqFt}
                           onChange={(e) => setHomeSqFt(Number(e.target.value))}
                           className="w-full accent-[#087CFF] cursor-pointer"
                         />
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                           <div className="p-3 rounded-lg bg-[#07111F] border border-white/5">
-                            <div className="text-xs text-[#A8B5C7]">Estimated Project Timeline</div>
+                            <div className="text-xs text-[#A8B5C7]">Prazo Estimado de Execução</div>
                             <div className="text-base font-bold text-white mt-1">
-                              {homeSqFt < 1500 ? '4–6 Weeks' : homeSqFt < 3000 ? '8–12 Weeks' : '14–18 Weeks'}
+                              {homeSqFt < 100 ? '4 a 6 Semanas' : homeSqFt < 250 ? '8 a 12 Semanas' : '14 a 18 Semanas'}
                             </div>
                           </div>
                           <div className="p-3 rounded-lg bg-[#07111F] border border-white/5">
-                            <div className="text-xs text-[#A8B5C7]">Rough Investment Range</div>
+                            <div className="text-xs text-[#A8B5C7]">Faixa Estimada de Investimento</div>
                             <div className="text-base font-bold text-emerald-400 mt-1">
-                              ${(homeSqFt * 75).toLocaleString()} – ${(homeSqFt * 120).toLocaleString()}
+                              R$ {(homeSqFt * 1400).toLocaleString('pt-BR')} – R$ {(homeSqFt * 2400).toLocaleString('pt-BR')}
                             </div>
                           </div>
                         </div>
@@ -462,16 +464,16 @@ export default function Showcase({ onBuildYours }) {
                   {activeConcept === 'beauty-wellness' && (
                     <div className="space-y-6 animate-fadeIn">
                       <div className="border-b border-white/10 pb-4">
-                        <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Medical Aesthetics &amp; Skin Science</div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Aura Aesthetics Clinic</h3>
-                        <p className="text-sm text-[#A8B5C7] mt-1">Doctor-led treatments, laser facial resurfacing &amp; non-surgical contouring.</p>
+                        <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Estética Médica Avançada &amp; Dermatologia</div>
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Clínica Aura Estética</h3>
+                        <p className="text-sm text-[#A8B5C7] mt-1">Protocolos dermatológicos de alta precisão, lasers e harmonização facial.</p>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {[
-                          { title: 'HydraFacial Elite MD', time: '50 Min', benefit: 'Deep pore detox & instant luminosity' },
-                          { title: 'Laser Skin Tightening', time: '60 Min', benefit: 'Collagen restoration & firming' },
-                          { title: 'Bespoke Chemical Peel', time: '45 Min', benefit: 'Hyperpigmentation correction' }
+                          { title: 'Limpeza de Pele Profunda Hydra', time: '50 Min', benefit: 'Desintoxicação dos poros e luminosidade imediata' },
+                          { title: 'Bioestimulador de Colágeno', time: '60 Min', benefit: 'Firmeza facial e rejuvenescimento natural' },
+                          { title: 'Peeling Químico Magistral', time: '45 Min', benefit: 'Uniformização do tom e renovação celular' }
                         ].map((card, i) => (
                           <div key={i} className="p-4 rounded-xl bg-[#101F35] border border-white/5 space-y-2">
                             <h4 className="text-sm font-bold text-white">{card.title}</h4>
@@ -489,23 +491,23 @@ export default function Showcase({ onBuildYours }) {
                   {activeConcept === 'professional' && (
                     <div className="space-y-6 animate-fadeIn">
                       <div className="border-b border-white/10 pb-4">
-                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">M&amp;A &amp; Strategic Wealth Advisory</div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Sterling Financial Partners</h3>
-                        <p className="text-sm text-[#A8B5C7] mt-1">Transaction advisory, capital growth structures, and institutional diligence.</p>
+                        <div className="text-xs uppercase tracking-widest text-[#00D5FF] font-semibold">Consultoria Estratégica &amp; Gestão Corporativa</div>
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Sterling Consultoria Empresarial</h3>
+                        <p className="text-sm text-[#A8B5C7] mt-1">Assessoria em expansão, reestruturação societária e fusões &amp; aquisições.</p>
                       </div>
 
                       <div className="p-5 rounded-xl bg-[#101F35]/70 border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                          <div className="text-xs text-[#A8B5C7]">Corporate Deal Experience</div>
-                          <div className="text-xl font-bold text-white mt-1">45+ Cross-Border</div>
+                          <div className="text-xs text-[#A8B5C7]">Projetos Estruturados</div>
+                          <div className="text-xl font-bold text-white mt-1">+45 Negócios</div>
                         </div>
                         <div>
-                          <div className="text-xs text-[#A8B5C7]">Average Due Diligence</div>
-                          <div className="text-xl font-bold text-[#00D5FF] mt-1">14 Business Days</div>
+                          <div className="text-xs text-[#A8B5C7]">Tempo Médio de Diagnóstico</div>
+                          <div className="text-xl font-bold text-[#00D5FF] mt-1">10 Dias Úteis</div>
                         </div>
                         <div>
-                          <div className="text-xs text-[#A8B5C7]">Confidentiality Rating</div>
-                          <div className="text-xl font-bold text-emerald-400 mt-1">SOC 2 Type II</div>
+                          <div className="text-xs text-[#A8B5C7]">Confidencialidade</div>
+                          <div className="text-xl font-bold text-emerald-400 mt-1">Padrão LGPD &amp; NDA</div>
                         </div>
                       </div>
                     </div>
@@ -515,21 +517,21 @@ export default function Showcase({ onBuildYours }) {
                   {activeConcept === 'restaurant' && (
                     <div className="space-y-6 animate-fadeIn">
                       <div className="border-b border-white/10 pb-4">
-                        <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Wood-Fired Gastronomy</div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">L&apos;Atelier Modern Hearth</h3>
-                        <p className="text-sm text-[#A8B5C7] mt-1">Locally farmed culinary creations paired with biodynamic reserve wines.</p>
+                        <div className="text-xs uppercase tracking-widest text-[#087CFF] font-semibold">Gastronomia Autoral &amp; Bar de Vinhos</div>
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">L&apos;Atelier Cucina &amp; Fogo</h3>
+                        <p className="text-sm text-[#A8B5C7] mt-1">Cardápio sazonal na brasa harmonizado com carta de vinhos selecionados.</p>
                       </div>
 
                       <div className="p-5 rounded-xl bg-[#101F35]/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center space-x-3">
                           <UtensilsCrossed className="w-5 h-5 text-[#00D5FF]" />
                           <div>
-                            <div className="text-xs text-[#A8B5C7]">Chef&apos;s 7-Course Evening Tasting</div>
-                            <div className="text-sm font-bold text-white">Daily Seating: 6:00 PM &amp; 8:30 PM</div>
+                            <div className="text-xs text-[#A8B5C7]">Menu Degustação do Chef em 7 Etapas</div>
+                            <div className="text-sm font-bold text-white">Sessões Diárias: 19h00 &amp; 21h30</div>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-xs text-[#A8B5C7]">Guests:</span>
+                          <span className="text-xs text-[#A8B5C7]">Mesa para:</span>
                           {[2, 4, 6].map((num) => (
                             <button
                               key={num}
@@ -538,7 +540,7 @@ export default function Showcase({ onBuildYours }) {
                                 restaurantGuests === num ? 'bg-[#00D5FF] text-[#07111F]' : 'bg-[#07111F] text-white'
                               }`}
                             >
-                              {num}
+                              {num} {num === 2 ? 'Lugares' : 'Pessoas'}
                             </button>
                           ))}
                         </div>
@@ -582,27 +584,27 @@ export default function Showcase({ onBuildYours }) {
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-white">{currentConcept.brandName}</span>
                       <span className="text-[10px] text-[#00D5FF] font-semibold bg-[#087CFF]/15 px-2 py-0.5 rounded">
-                        Mobile Optimized
+                        100% Responsivo
                       </span>
                     </div>
 
                     <div className="p-3.5 rounded-xl bg-[#101F35]/80 border border-white/5 space-y-1.5">
                       <div className="text-xs font-bold text-white">{currentConcept.tagline}</div>
-                      <div className="text-[11px] text-[#A8B5C7]">Fast 1-tap booking &amp; quote intake layout.</div>
+                      <div className="text-[11px] text-[#A8B5C7]">Interface ultra-rápida pensada para gerar conversão no celular.</div>
                     </div>
 
                     <div className="space-y-2 pt-2">
-                      <div className="text-[11px] font-semibold text-[#A8B5C7]">Popular Inquiries:</div>
+                      <div className="text-[11px] font-semibold text-[#A8B5C7]">Ações Frequentes:</div>
                       <div className="p-2.5 rounded-lg bg-[#101F35] text-xs text-white/90 flex justify-between items-center border border-white/5">
-                        <span>Online Booking</span>
+                        <span>Agendamento Online</span>
                         <ChevronRight className="w-3.5 h-3.5 text-[#00D5FF]" />
                       </div>
                       <div className="p-2.5 rounded-lg bg-[#101F35] text-xs text-white/90 flex justify-between items-center border border-white/5">
-                        <span>Service Pricing Menu</span>
+                        <span>Cardápio de Serviços &amp; Preços</span>
                         <ChevronRight className="w-3.5 h-3.5 text-[#00D5FF]" />
                       </div>
                       <div className="p-2.5 rounded-lg bg-[#101F35] text-xs text-white/90 flex justify-between items-center border border-white/5">
-                        <span>Direct WhatsApp Support</span>
+                        <span>Falar no WhatsApp Comercial</span>
                         <ChevronRight className="w-3.5 h-3.5 text-[#00D5FF]" />
                       </div>
                     </div>
@@ -613,7 +615,7 @@ export default function Showcase({ onBuildYours }) {
                       onClick={onBuildYours}
                       className="w-full py-3 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-bold text-xs shadow-lg"
                     >
-                      Build A Website Like This
+                      Quero um Site Assim
                     </button>
                   </div>
 
@@ -639,7 +641,7 @@ export default function Showcase({ onBuildYours }) {
             }}
             className="inline-flex items-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white font-bold text-base shadow-lg shadow-[#087CFF]/30 hover:shadow-[#087CFF]/50 hover:scale-[1.02] active:scale-98 transition-all group"
           >
-            <span>Let&apos;s Build Yours</span>
+            <span>Quero Meu Site de Alto Padrão</span>
             <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
           </button>
         </div>

@@ -5,30 +5,30 @@ export default function WhyChooseUs() {
   const pillars = [
     {
       number: '01',
-      title: 'Tailored Solutions',
-      statement: 'Every business is different. Your digital solution should reflect that.',
-      detail: 'We build systems designed around your workflow, your customers, and your specific commercial requirements—never cookie-cutter templates.',
+      title: 'Soluções Sob Medida',
+      statement: 'Cada empresa é única. Sua presença digital precisa refletir essa realidade.',
+      detail: 'Criamos arquiteturas desenhadas em torno do seu fluxo de trabalho, dos seus clientes e dos seus objetivos comerciais reais — nunca usamos templates genéricos.',
       icon: Sliders
     },
     {
       number: '02',
-      title: 'Design With Purpose',
-      statement: 'We combine visual quality with intuitive experiences and practical business goals.',
-      detail: 'Aesthetics should elevate your brand credibility and guide visitors toward clear, decisive actions that convert.',
+      title: 'Design com Propósito',
+      statement: 'Combinamos alto padrão visual com experiência intuitiva e metas claras de negócio.',
+      detail: 'A estética sofisticada eleva a credibilidade da sua marca e conduz o visitante com clareza para ações decisivas que geram contato e vendas.',
       icon: Compass
     },
     {
       number: '03',
-      title: 'Built for Performance',
-      statement: 'Responsive experiences, clean architecture, and attention to the details that matter.',
-      detail: 'Lightning-fast load speeds, accessible typography, strict mobile ergonomics, and lean engineering without bloated dependencies.',
+      title: 'Foco Total em Desempenho',
+      statement: 'Experiências ultra-responsivas, arquitetura limpa e cuidado com cada milissegundo.',
+      detail: 'Carregamento instantâneo, tipografia impecável, ergonomia pensada para mobile e engenharia moderna sem dependências desnecessárias.',
       icon: Zap
     },
     {
       number: '04',
-      title: 'Room to Grow',
-      statement: 'Digital solutions designed with your future needs in mind.',
-      detail: 'Modular architecture allowing your digital footprint to expand seamlessly into custom software, client portals, and automated workflows as your business scales.',
+      title: 'Pronto para Escalar',
+      statement: 'Soluções digitais pensadas desde o início para o crescimento futuro.',
+      detail: 'Estrutura modular que permite expandir seu site para softwares sob medida, áreas de membros e automações conforme seu faturamento aumenta.',
       icon: TrendingUp
     }
   ];
@@ -43,8 +43,8 @@ export default function WhyChooseUs() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16 lg:mb-20">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Technology Is Powerful. <br className="hidden sm:inline" />
-            <span className="gradient-text">The Right Partner Makes It Valuable.</span>
+            Tecnologia É Poderosa. <br className="hidden sm:inline" />
+            <span className="gradient-text">O Parceiro Certo Faz Dela Um Grande Investimento.</span>
           </h2>
         </div>
 
@@ -82,7 +82,7 @@ export default function WhyChooseUs() {
 
                 <div className="pt-6 mt-6 border-t border-white/5 flex items-center space-x-2 text-xs font-semibold text-[#087CFF] group-hover:text-[#00D5FF] transition-colors">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#00D5FF]"></span>
-                  <span>Uncompromised Commercial Integrity</span>
+                  <span>Padrão RydenTec de Engenharia Digital</span>
                 </div>
               </div>
             );
