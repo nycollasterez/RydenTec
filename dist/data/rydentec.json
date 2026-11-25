@@ -1,0 +1,620 @@
+{
+  "admin": {
+    "username": "admin",
+    "passwordHash": "$2a$10$WG5Y3uAV9ac3HHFLlit0X.UgcDns190yKlMCp50ZbqyonN4jG.VFW",
+    "lastLogin": "2026-11-25T17:58:45.887Z"
+  },
+  "settings": {
+    "brandName": "RydenTec",
+    "tagline": "Tecnologia Que Impulsiona Seu Negócio.",
+    "officialDomain": "rydentec.com",
+    "secondaryDomain": "rydentec.online",
+    "heroHeadline": "Criamos Experiências Digitais Que Fazem Seu Negócio Crescer.",
+    "heroSupporting": "De sites de alta conversão a softwares sob medida e automação inteligente, transformamos ideias em resultados digitais concretos.",
+    "contactEmail": "contato@rydentec.com",
+    "whatsappNumber": "+55 (11) 98902-2184",
+    "whatsappMessage": "Olá! Vi o site da RydenTec e gostaria de conversar sobre um projeto digital para o meu negócio.",
+    "schedulingUrl": "https://calendly.com/rydentec/consultoria",
+    "metaPixelId": "",
+    "gaMeasurementId": "",
+    "pricing": {
+      "starter": {
+        "title": "SITE STARTER",
+        "price": "Sob consulta",
+        "startingNote": "",
+        "description": "Ideal para pequenas empresas que desejam presença online profissional e de alto impacto.",
+        "features": [
+          "Site Responsivo e Moderno",
+          "Até 3 Páginas Principais",
+          "Formulário & Integração WhatsApp",
+          "Otimização Total para Mobile",
+          "Configuração de SEO Google",
+          "Integração com Redes Sociais"
+        ],
+        "cta": "Pedir Orçamento",
+        "popular": false
+      },
+      "business": {
+        "title": "SITE BUSINESS",
+        "price": "Sob consulta",
+        "startingNote": "",
+        "description": "Para empresas que necessitam de presença digital robusta, completa e orientada a vendas.",
+        "features": [
+          "Até 7 Páginas Personalizadas",
+          "Design Exclusivo de Alta Conversão",
+          "Captura de Leads e Formulários",
+          "Integração com Google Analytics",
+          "Fundamentos Avançados de SEO",
+          "Estrutura Otimizada para Tráfego Pago"
+        ],
+        "cta": "Pedir Orçamento",
+        "popular": true
+      },
+      "custom": {
+        "title": "SOLUÇÕES SOB MEDIDA",
+        "price": "Sob consulta",
+        "startingNote": "",
+        "description": "Para plataformas, lojas virtuais, sistemas web, portais e automações comerciais com IA.",
+        "features": [
+          "Escopo 100% Personalizado",
+          "Painéis e Dashboards Exclusivos",
+          "Integrações de Sistemas e APIs",
+          "Arquitetura Escalável em Nuvem",
+          "Experiência do Usuário Dedicada",
+          "Desenvolvimento e Suporte Especializado"
+        ],
+        "cta": "Fale com a Gente",
+        "popular": false
+      },
+      "disclaimer": "O valor final depende dos requisitos específicos, funcionalidades e escopo de cada projeto. Hospedagem e serviços de terceiros são orçados com total transparência."
+    }
+  },
+  "portfolio": [
+    {
+      "id": "proj-01",
+      "title": "Honorato Barber Shop & Grooming Lounge",
+      "industry": "Barbershop & Men's Grooming",
+      "category": "Website Development",
+      "isConcept": false,
+      "published": true,
+      "order": 1,
+      "liveUrl": "https://www.honoratobarbershop.com.br/",
+      "shortDescription": "Official high-converting digital presence and online booking experience with modern dark aesthetic and mobile-first scheduling.",
+      "fullDescription": "Custom high-performance web experience engineered for Honorato Barber Shop (live at honoratobarbershop.com.br). Features automated appointment scheduling, service packages showcase, team barber portfolios, and direct WhatsApp VIP booking integration.",
+      "desktopPreview": "/portfolio/barbershop-desktop.png",
+      "mobilePreview": "/portfolio/barbershop-mobile.png",
+      "badge": "Live Client Project",
+      "techStack": [
+        "Responsive UX",
+        "Direct Booking",
+        "WhatsApp VIP Integration",
+        "SEO Optimized"
+      ],
+      "metrics": [
+        "Sub-second load speed",
+        "Mobile-first layout",
+        "Live Production Site"
+      ]
+    },
+    {
+      "id": "proj-02",
+      "title": "Sofisticasa Interior & Architecture Studio",
+      "industry": "Home Services & Interior Design",
+      "category": "Website Redesign",
+      "isConcept": true,
+      "published": true,
+      "order": 2,
+      "shortDescription": "Editorial-grade portfolio experience highlighting luxury residential projects, material finishes, and consultation scheduling.",
+      "fullDescription": "Sophisticated digital showcase for an upscale interior architecture studio. Focuses on immersive project galleries, client brief intake forms, and seamless responsive typography that elevates brand credibility.",
+      "desktopPreview": "/portfolio/interior-desktop.png",
+      "mobilePreview": "/portfolio/interior-mobile.png",
+      "badge": "Concept Project",
+      "techStack": [
+        "Responsive UX",
+        "Next-gen Images",
+        "Lead Funnel",
+        "Analytics"
+      ],
+      "metrics": [
+        "Luxury visual tone",
+        "Inquiry intake form",
+        "Editorial typography"
+      ]
+    },
+    {
+      "id": "proj-03",
+      "title": "Apex Auto Detailing & Ceramic Studio",
+      "industry": "Auto Detailing & Care",
+      "category": "Website Development",
+      "isConcept": true,
+      "published": true,
+      "order": 3,
+      "shortDescription": "Interactive vehicle package selector with dynamic quote calculation and high-resolution before/after comparisons.",
+      "fullDescription": "Custom automotive studio web application featuring interactive service tier selection (Paint Correction, Ceramic Coating, PPF), quote estimator, and localized Google Maps & review integration.",
+      "desktopPreview": "/portfolio/detailing-desktop.png",
+      "mobilePreview": "/portfolio/detailing-mobile.png",
+      "badge": "Concept Project",
+      "techStack": [
+        "Interactive Calculator",
+        "Modern UI",
+        "Conversion Engine"
+      ],
+      "metrics": [
+        "Package builder",
+        "Visual before/after",
+        "Instant quote request"
+      ]
+    },
+    {
+      "id": "proj-04",
+      "title": "RydenFlow Business Operations ERP",
+      "industry": "Professional Services",
+      "category": "Custom Software",
+      "isConcept": true,
+      "published": true,
+      "order": 4,
+      "shortDescription": "Modular internal enterprise dashboard for job tracking, real-time invoicing, customer management, and team dispatch.",
+      "fullDescription": "Enterprise workflow management system built to replace scattered spreadsheets. Centralizes quotes, automated payment status tracking, inventory alerts, and role-based staff permissions into one fast, secure cloud portal.",
+      "desktopPreview": "/portfolio/erp-desktop.png",
+      "mobilePreview": "/portfolio/erp-mobile.png",
+      "badge": "Concept Project",
+      "techStack": [
+        "Node.js API",
+        "Role-Based Access",
+        "Data Analytics",
+        "Realtime Sync"
+      ],
+      "metrics": [
+        "Real-time KPIs",
+        "Automated invoicing",
+        "Zero-clutter interface"
+      ]
+    },
+    {
+      "id": "proj-05",
+      "title": "Ótica Central Precision Eyewear",
+      "industry": "Retail & Wellness",
+      "category": "App Development",
+      "isConcept": true,
+      "published": true,
+      "order": 5,
+      "shortDescription": "Modern digital catalog and prescription appointment scheduling system for boutique optical practices.",
+      "fullDescription": "Digital catalog and examination scheduling web app. Allows patients to browse curated designer frames, upload prescription documents securely, and book comprehensive optometry examinations in seconds.",
+      "desktopPreview": "/portfolio/optical-desktop.png",
+      "mobilePreview": "/portfolio/optical-mobile.png",
+      "badge": "Concept Project",
+      "techStack": [
+        "Progressive Web App",
+        "Prescription Upload",
+        "HIPAA-aware UX"
+      ],
+      "metrics": [
+        "Frame catalog",
+        "One-tap booking",
+        "Speed-optimized assets"
+      ]
+    },
+    {
+      "id": "proj-06",
+      "title": "AutoAssist AI Customer Dispatcher",
+      "industry": "AI & Business Automation",
+      "category": "AI & Automation",
+      "isConcept": true,
+      "published": true,
+      "order": 6,
+      "shortDescription": "Intelligent multi-channel intake bot that pre-qualifies incoming inquiries and syncs directly into CRM calendars.",
+      "fullDescription": "Automated conversational pipeline connecting WhatsApp, web contact forms, and Google Calendar. Automatically answers frequent service questions, estimates turnaround times, and books consultations without manual staff overhead.",
+      "desktopPreview": "/portfolio/automation-desktop.png",
+      "mobilePreview": "/portfolio/automation-mobile.png",
+      "badge": "Concept Project",
+      "techStack": [
+        "AI Language API",
+        "Webhook Dispatcher",
+        "CRM Sync",
+        "WhatsApp API"
+      ],
+      "metrics": [
+        "24/7 instant replies",
+        "CRM auto-sync",
+        "Lead qualification"
+      ]
+    }
+  ],
+  "leads": [
+    {
+      "id": "lead_1794357531323_ci1un",
+      "fullName": "333333333333",
+      "businessName": "3333333333",
+      "email": "nycollasteixeira30@gmail.com",
+      "phone": "",
+      "service": "New Website",
+      "budget": "Under $1,000",
+      "projectDetails": "ededecercrc3rf3rf3rv3vf3rf3rf34f3f",
+      "status": "new",
+      "notes": "",
+      "createdAt": "2026-11-11T00:38:51.323Z",
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+    },
+    {
+      "id": "lead_1794357253709_l6fos",
+      "fullName": "Marcus Vance",
+      "businessName": "Vance Precision Engineering",
+      "email": "marcus@vanceprecision.com",
+      "phone": "+1 (305) 555-8821",
+      "service": "Custom Software",
+      "budget": ",000+",
+      "projectDetails": "Looking to replace legacy excel dispatch sheets with a custom web ERP and real-time client status tracker.",
+      "status": "new",
+      "notes": "",
+      "createdAt": "2026-11-11T00:34:13.709Z",
+      "ipAddress": "::1",
+      "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; pt-BR) WindowsPowerShell/5.1.26100.9711"
+    }
+  ],
+  "analytics": {
+    "visits": 27,
+    "uniqueIps": {
+      "::1": 27
+    },
+    "whatsappClicks": 1,
+    "quoteRequests": 2,
+    "consultationClicks": 0,
+    "events": [
+      {
+        "event": "whatsapp_click",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T18:01:36.871Z"
+      },
+      {
+        "event": "service_tab_select_custom-software",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:38.674Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:37.597Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:37.279Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/admin",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:57:58.281Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T13:45:43.603Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T13:44:26.183Z"
+      },
+      {
+        "event": "service_tab_select_ai-automation",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:44.624Z"
+      },
+      {
+        "event": "service_tab_select_custom-software",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:23.909Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:19.057Z"
+      },
+      {
+        "event": "service_tab_select_loja-virtual",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:14.973Z"
+      },
+      {
+        "event": "service_tab_select_website-development",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:51:05.729Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:50:23.819Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:26.880Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:24.090Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:49:23.059Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:27:25.965Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:27:20.721Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:34.118Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:32.184Z"
+      },
+      {
+        "event": "showcase_concept_switch_restaurant",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:29.314Z"
+      },
+      {
+        "event": "showcase_concept_switch_professional",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:28.135Z"
+      },
+      {
+        "event": "showcase_concept_switch_beauty-wellness",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:26.179Z"
+      },
+      {
+        "event": "showcase_concept_switch_home-services",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:17.310Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:26:14.035Z"
+      },
+      {
+        "event": "showcase_cta_click",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:25:03.702Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:24:19.973Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:24:08.168Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:23:54.944Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:29.706Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:20.248Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:16.343Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:20:11.270Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:13:07.611Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:06:47.571Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:50.667Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:46.291Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/preview",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T09:00:29.578Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-18T08:43:39.133Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:46:23.469Z"
+      },
+      {
+        "event": "pricing_plan_click_business",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:02:15.532Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:01:16.866Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T01:01:15.823Z"
+      },
+      {
+        "event": "showcase_concept_switch_barbershop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:29.367Z"
+      },
+      {
+        "event": "showcase_concept_switch_restaurant",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:22.725Z"
+      },
+      {
+        "event": "showcase_concept_switch_professional",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:20.132Z"
+      },
+      {
+        "event": "showcase_concept_switch_beauty-wellness",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:19.213Z"
+      },
+      {
+        "event": "showcase_concept_switch_home-services",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:15.605Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:58:08.029Z"
+      },
+      {
+        "event": "showcase_device_toggle_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:57:59.049Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:54:52.921Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:54:28.193Z"
+      },
+      {
+        "event": "showcase_device_toggle_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:41:16.593Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:41:15.473Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/admin",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:39:24.135Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/admin",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:39:22.410Z"
+      },
+      {
+        "event": "lead_submission_success",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:38:51.345Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:36:30.363Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-11T00:36:25.762Z"
+      }
+    ]
+  }
+}

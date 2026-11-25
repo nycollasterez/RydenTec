@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+    # Para domínio principal use $HOME/public_html/
+    # Se for domínio adicional na HostGator Plano M, altere para a pasta do domínio (ex: $HOME/rydentec.com/)
+    - export DEPLOYPATH=$HOME/public_html/
+    - /bin/mkdir -p ${DEPLOYPATH}
+    - /bin/cp -Rf dist/* ${DEPLOYPATH}
+    - /bin/cp -f dist/.htaccess ${DEPLOYPATH}
+    - /bin/mkdir -p ${DEPLOYPATH}data
+    - /bin/cp -f dist/data/.htaccess ${DEPLOYPATH}data/
+    - '[ -f ${DEPLOYPATH}data/rydentec.json ] || /bin/cp -f dist/data/rydentec.json ${DEPLOYPATH}data/rydentec.json'

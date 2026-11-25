@@ -1,0 +1,54 @@
+# ====================================================================
+# RYDENTEC — CONFIGURAÇÃO APACHE / HOSTGATOR PLANO M (.htaccess)
+# ====================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Preservar header Authorization (necessário para login /admin no PHP da HostGator)
+  RewriteCond %{HTTP:Authorization} ^(.*)
+  RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+  # 1. Bloquear acesso direto à pasta /data via navegador (segurança de leads/senhas)
+  RewriteRule ^data/ - [F,L]
+
+  # 2. Roteamento unificado de toda a API (/api/*) para PHP nativo
+  RewriteRule ^api/(.*)$ api/index.php?route=$1 [L,QSA]
+
+  # 3. Manter arquivos e pastas estáticas existentes intactos (assets, brand, robots, sitemap)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 4. Redirecionar todas as rotas do frontend (/admin, /preview, etc.) para index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Compressão GZIP para carregamento ultra-rápido
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
+
+# Bloquear listagem de diretórios por segurança
+Options -Indexes
+
+# Cabeçalhos de Segurança
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
