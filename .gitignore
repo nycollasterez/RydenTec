@@ -4,3 +4,4 @@ data/rydentec.json.tmp
 .env
 .DS_Store
 *.log
+*.zip

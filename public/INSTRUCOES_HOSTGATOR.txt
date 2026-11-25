@@ -1,37 +1,49 @@
 ====================================================================
-  RYDENTEC TECNOLOGIA — GUIA DE DEPLOY (HOSTGATOR / CPANEL)
+  RYDENTEC TECNOLOGIA — GUIA DE DEPLOY (HOSTGATOR PLANO M / CPANEL)
 ====================================================================
 
-Este pacote foi compilado e preparado especificamente para hospedagem 
-HostGator / cPanel (Apache + PHP nativo), sem necessidade de Node.js!
+Este pacote foi compilado e otimizado especialmente para a hospedagem
+compartilhada HostGator Plano M (Apache + PHP nativo), sem precisar
+configurar Node.js!
+
+Inclui:
+✓ Frontend SPA React compilado (Vite + Tailwind CSS)
+✓ Roteador completo PHP (/api/index.php) com suporte a:
+  - Configurações dinâmicas (/api/settings)
+  - Portfólio (/api/portfolio)
+  - Formulário de Orçamento (/api/leads)
+  - Analytics (/api/analytics/track)
+  - Painel Administrativo (/admin + /api/auth/login + CRUD completo)
+✓ Proteção de dados (.htaccess bloqueando acesso direto a /data)
+✓ Compressão GZIP e cache de assets estáticos
 
 --------------------------------------------------------------------
-PASSO A PASSO PARA PUBLICAR EM MENOS DE 1 MINUTO
+PASSO A PASSO PARA SUBIR NA HOSTGATOR (PLANO M)
 --------------------------------------------------------------------
 
 1. ACESSE O CPANEL DA HOSTGATOR:
    - Abra o "Gerenciador de Arquivos" (File Manager).
-   - Navegue até a pasta do seu domínio (geralmente "public_html").
-   - Se for o site principal: fique na raiz da "public_html".
-   - Se for um subdomínio ou subpasta (ex: rydentec): entre na pasta correspondente.
+   - Se for o domínio principal do Plano M: entre na pasta "public_html".
+   - Se for um domínio adicional (addon domain) no Plano M: entre na
+     pasta do domínio correspondente (ex: "public_html/rydentec.com"
+     ou a pasta configurada em Domínios Adicionais).
 
-2. ENVIAR O ARQUIVO:
+2. ENVIE E EXTRAIA O PACOTE:
    - Clique em "Carregar" (Upload) no menu superior.
-   - Selecione e envie o arquivo: rydentec_hostgator.zip
+   - Envie o arquivo: rydentec_hostgator.zip
+   - Volte ao Gerenciador de Arquivos, clique com o botão direito em
+     "rydentec_hostgator.zip" e escolha "Extrair" (Extract).
+   - Certifique-se de que "Mostrar arquivos ocultos (dotfiles)" esteja
+     ativado nas Configurações (canto superior direito) para confirmar
+     que o arquivo ".htaccess" foi extraído na raiz.
 
-3. EXTRAIR:
-   - Clique com o botão direito sobre o arquivo "rydentec_hostgator.zip".
-   - Escolha a opção "Extrair" (Extract).
-   - Confirme a extração na pasta atual.
+3. PRONTO!
+   - Site principal: https://seudominio.com/
+   - Painel Admin:   https://seudominio.com/admin
+     (Usuário: admin | Senha padrão: RydenTec2026!)
 
-4. PRONTO!
-   O site estará 100% no ar com:
-   - Carregamento ultrarrápido (Vite SPA)
-   - Rotas amigáveis configuradas (.htaccess)
-   - Integração com WhatsApp
-   - Formulário de orçamento funcionando
-   - Painel e persistência de dados em JSON
-
+   *Dica de segurança: após o primeiro login no painel /admin, recomenda-se
+    alterar ou gerenciar os leads e configurações diretamente por lá.*
 ====================================================================
 RydenTec — Tecnologia Que Impulsiona Seu Negócio
 ====================================================================

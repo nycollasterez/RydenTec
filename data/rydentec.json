@@ -2,7 +2,7 @@
   "admin": {
     "username": "admin",
     "passwordHash": "$2a$10$WG5Y3uAV9ac3HHFLlit0X.UgcDns190yKlMCp50ZbqyonN4jG.VFW",
-    "lastLogin": "2026-11-11T00:39:38.885Z"
+    "lastLogin": "2026-11-25T17:58:45.887Z"
   },
   "settings": {
     "brandName": "RydenTec",
@@ -253,14 +253,44 @@
     }
   ],
   "analytics": {
-    "visits": 26,
+    "visits": 27,
     "uniqueIps": {
-      "::1": 26
+      "::1": 27
     },
-    "whatsappClicks": 0,
+    "whatsappClicks": 1,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "whatsapp_click",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T18:01:36.871Z"
+      },
+      {
+        "event": "service_tab_select_custom-software",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:38.674Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:37.597Z"
+      },
+      {
+        "event": "service_tab_select_landing-pages",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:59:37.279Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/admin",
+        "referrer": "direct",
+        "timestamp": "2026-11-25T17:57:58.281Z"
+      },
       {
         "event": "service_tab_select_landing-pages",
         "path": "/",

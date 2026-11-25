@@ -1,23 +1,27 @@
 # ====================================================================
-# RYDENTEC — CONFIGURAÇÃO APACHE / HOSTGATOR (.htaccess)
+# RYDENTEC — CONFIGURAÇÃO APACHE / HOSTGATOR PLANO M (.htaccess)
 # ====================================================================
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. Roteamento de API se hospedado em Apache com PHP
-  RewriteRule ^api/settings/?$ api/settings.php [L,QSA]
-  RewriteRule ^api/portfolio/?$ api/portfolio.php [L,QSA]
-  RewriteRule ^api/leads/?$ api/leads.php [L,QSA]
-  RewriteRule ^api/analytics/track/?$ api/track.php [L,QSA]
+  # Preservar header Authorization (necessário para login /admin no PHP da HostGator)
+  RewriteCond %{HTTP:Authorization} ^(.*)
+  RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
-  # 2. Manter arquivos e pastas existentes intactos (assets, brand, css, js)
+  # 1. Bloquear acesso direto à pasta /data via navegador (segurança de leads/senhas)
+  RewriteRule ^data/ - [F,L]
+
+  # 2. Roteamento unificado de toda a API (/api/*) para PHP nativo
+  RewriteRule ^api/(.*)$ api/index.php?route=$1 [L,QSA]
+
+  # 3. Manter arquivos e pastas estáticas existentes intactos (assets, brand, robots, sitemap)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 3. Redirecionar todas as rotas SPA para o index.html
+  # 4. Redirecionar todas as rotas do frontend (/admin, /preview, etc.) para index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
