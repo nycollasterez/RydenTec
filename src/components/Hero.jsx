@@ -123,7 +123,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
   // 1. Conexão contínua do cabeçalho RydenTec para o Hero (0.4s a 1.3s)
   const headerConnectorHeight = mapRange(t, 0.4, 1.0, 0, 100);
   const headerConnectorTurn = mapRange(t, 0.9, 1.3, 0, 100);
-  const guidesOpacity = mapRange(t, 0.3, 0.65, 0, 1) * (1 - mapRange(t, 3.4, 4.1, 0, 0.65));
+  const guidesOpacity = mapRange(t, 0.3, 0.65, 0, 1) * (1 - mapRange(t, 3.2, 4.0, 0, 1));
 
   // 2. O título RydenTec ganha forma (0.8s a 2.2s)
   const baselineOpacity = mapRange(t, 0.75, 1.2, 0, 0.45) * (1 - mapRange(t, 1.9, 2.5, 0, 1));

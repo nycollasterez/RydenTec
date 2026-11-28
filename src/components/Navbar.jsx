@@ -34,16 +34,14 @@ export default function Navbar({ currentPath = '/', introProgress = 1, onNavigat
 
   // Sincronização do cabeçalho com o motion da abertura (0.0 -> 0.20 do introProgress = ~0.0s a 0.85s)
   const p = currentPath === '/' ? introProgress : 1;
-  const lineProgress = Math.min(1, Math.max(0, p / 0.18));
   const navItemsOpacity = currentPath === '/' ? Math.min(1, 0.35 + (p / 0.16) * 0.65) : 1;
-  const isDrawingLine = currentPath === '/' && lineProgress > 0.02 && lineProgress < 0.99;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || currentPath !== '/'
           ? 'bg-[#07111F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] py-3'
-          : 'bg-gradient-to-b from-[#07111F]/90 via-[#07111F]/55 to-transparent backdrop-blur-sm py-4 sm:py-5'
+          : 'bg-transparent py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -123,18 +121,6 @@ export default function Navbar({ currentPath = '/', introProgress = 1, onNavigat
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Linha de construção digital fundida na base do cabeçalho */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/5 overflow-visible pointer-events-none">
-        <div
-          style={{ width: `${lineProgress * 100}%` }}
-          className="h-full bg-gradient-to-r from-transparent via-[#087CFF]/70 to-[#00D5FF]/80 relative transition-[width] duration-75"
-        >
-          {isDrawingLine && (
-            <span className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#00D5FF] shadow-[0_0_12px_#00D5FF]"></span>
-          )}
         </div>
       </div>
 
