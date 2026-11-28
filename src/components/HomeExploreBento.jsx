@@ -8,21 +8,18 @@ import {
   ShieldCheck,
   Tag,
   MessageSquare,
-  Zap,
   Sparkles,
   Instagram,
   Phone
 } from 'lucide-react';
 
 const MARQUEE_ITEMS = [
-  'Sites Institucionais Sob Medida',
-  'Lojas Virtuais com Pix & Frete',
-  'Landing Pages de Alta Conversão',
+  'Arquitetura Digital Sob Medida',
+  'Sites de Alta Conversão',
+  'E-commerce & Checkout Pix',
+  'Software & Sistemas Web',
   'Automação WhatsApp & IA',
-  'Sistemas Web & Dashboards',
-  'Score 99+ Google Lighthouse',
-  'Design Responsivo PC & Celular',
-  'Hospedagem & SSL Blindado',
+  'Design Editorial & Performance',
 ];
 
 const BENTO_PAGES = [
@@ -148,16 +145,22 @@ export default function HomeExploreBento({ onNavigate, whatsappNumber, instagram
 
   return (
     <div className="bg-[#07111F]">
-      {/* Faixa Cinética de Especialidades */}
-      <div className="border-y border-white/10 bg-[#0B1730]/60 py-3.5 overflow-hidden select-none">
-        <div className="animate-marquee items-center gap-8">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((text, idx) => (
-            <div key={idx} className="flex items-center space-x-3 text-xs sm:text-sm font-medium text-[#A8B5C7] whitespace-nowrap">
-              <Zap className="w-3.5 h-3.5 text-[#00D5FF] flex-shrink-0" />
-              <span className="text-white/90">{text}</span>
-              <span className="text-white/20 pl-4">•</span>
-            </div>
-          ))}
+      {/* Faixa Cinética Editorial Minimalista (Alto Padrão) */}
+      <div className="border-y border-white/[0.07] bg-[#07111F]/95 py-4 sm:py-5 overflow-hidden select-none">
+        <div className="marquee-mask overflow-hidden">
+          <div className="animate-marquee items-center">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((text, idx) => (
+              <div
+                key={idx}
+                className="flex items-center whitespace-nowrap"
+              >
+                <span className="px-6 sm:px-9 text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.26em] text-[#A8B5C7] hover:text-white transition-colors">
+                  {text}
+                </span>
+                <span className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#00D5FF]/40 to-transparent flex-shrink-0"></span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

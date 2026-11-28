@@ -255,14 +255,86 @@
     }
   ],
   "analytics": {
-    "visits": 44,
+    "visits": 50,
     "uniqueIps": {
-      "::1": 44
+      "::1": 50
     },
     "whatsappClicks": 2,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:18:38.610Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:18:34.992Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:18:29.162Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:18:24.798Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:46.414Z"
+      },
+      {
+        "event": "hero_stage_mode_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:19.087Z"
+      },
+      {
+        "event": "hero_stage_mode_blueprint",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:17.265Z"
+      },
+      {
+        "event": "hero_stage_mode_code",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:15.810Z"
+      },
+      {
+        "event": "hero_stage_mode_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:14.535Z"
+      },
+      {
+        "event": "hero_stage_mode_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:12.180Z"
+      },
+      {
+        "event": "hero_stage_mode_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:08.152Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:17:02.080Z"
+      },
       {
         "event": "hero_replay_motion",
         "path": "/",
