@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
-export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) {
+export default function Navbar({ currentPath = '/', introProgress = 1, onNavigate, onQuoteClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -32,17 +32,26 @@ export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) 
     }
   };
 
+  // Sincronização do cabeçalho com o motion da abertura (0.0 -> 0.20 do introProgress = ~0.0s a 0.85s)
+  const p = currentPath === '/' ? introProgress : 1;
+  const lineProgress = Math.min(1, Math.max(0, p / 0.18));
+  const navItemsOpacity = currentPath === '/' ? Math.min(1, 0.35 + (p / 0.16) * 0.65) : 1;
+  const isDrawingLine = currentPath === '/' && lineProgress > 0.02 && lineProgress < 0.99;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || currentPath !== '/'
-          ? 'bg-[#07111F]/90 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
-          : 'bg-transparent py-5'
+          ? 'bg-[#07111F]/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.35)] py-3'
+          : 'bg-gradient-to-b from-[#07111F]/90 via-[#07111F]/55 to-transparent backdrop-blur-sm py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Brand Logo - Preserving original typography, proportions and visual characteristics */}
+        <div
+          style={{ opacity: navItemsOpacity }}
+          className="flex items-center justify-between transition-opacity duration-200"
+        >
+          {/* Brand Logo */}
           <a
             href="/"
             onClick={(e) => {
@@ -54,7 +63,7 @@ export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) 
             <img
               src="/brand/rydentec-logo.png"
               alt="RydenTec — Tecnologia Que Impulsiona Seu Negócio"
-              className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(8,124,255,0.3)]"
+              className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(8,124,255,0.35)]"
             />
           </a>
 
@@ -78,7 +87,7 @@ export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) 
                 >
                   {link.name}
                   {isActive && (
-                    <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-[#087CFF] to-[#00D5FF] rounded-full"></span>
+                    <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-[#087CFF] to-[#00D5FF] rounded-full shadow-[0_0_8px_#00D5FF]"></span>
                   )}
                 </a>
               );
@@ -92,7 +101,7 @@ export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) 
                 trackEvent('quote_cta_nav_click');
                 onQuoteClick();
               }}
-              className="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-[#087CFF]"
+              className="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-[#087CFF] cursor-pointer"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#087CFF] to-[#00D5FF] transition-all duration-300 group-hover:opacity-100 opacity-90"></span>
               <span className="relative flex items-center space-x-2 px-5 py-2.5 rounded-[11px] bg-[#07111F] transition-all duration-200 group-hover:bg-opacity-0">
@@ -114,6 +123,18 @@ export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) 
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Linha de construção digital fundida na base do cabeçalho */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/5 overflow-visible pointer-events-none">
+        <div
+          style={{ width: `${lineProgress * 100}%` }}
+          className="h-full bg-gradient-to-r from-transparent via-[#087CFF]/70 to-[#00D5FF]/80 relative transition-[width] duration-75"
+        >
+          {isDrawingLine && (
+            <span className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#00D5FF] shadow-[0_0_12px_#00D5FF]"></span>
+          )}
         </div>
       </div>
 

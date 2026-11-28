@@ -255,14 +255,38 @@
     }
   ],
   "analytics": {
-    "visits": 27,
+    "visits": 30,
     "uniqueIps": {
-      "::1": 27
+      "::1": 30
     },
-    "whatsappClicks": 1,
+    "whatsappClicks": 2,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:44:21.496Z"
+      },
+      {
+        "event": "whatsapp_click",
+        "path": "/contato",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:44:20.046Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/contato",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:44:11.063Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:43:46.008Z"
+      },
       {
         "event": "whatsapp_click",
         "path": "/",

@@ -36,6 +36,7 @@ const QUICK_PAGES = [
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => normalizePath(window.location.pathname));
+  const [introProgress, setIntroProgress] = useState(0);
   const [isAdminRoute, setIsAdminRoute] = useState(false);
   const [adminToken, setAdminToken] = useState(() => localStorage.getItem('rydentec_admin_token') || '');
   const [adminUser, setAdminUser] = useState(() => {
@@ -221,6 +222,8 @@ export default function App() {
             <Hero
               onStartProject={() => goToContact('Site Institucional')}
               onExploreServices={() => navigate('/servicos')}
+              onExploreShowcase={() => navigate('/vitrine')}
+              onProgressChange={setIntroProgress}
             />
 
             {/* Acesso limpo e direto às páginas separadas */}
@@ -281,6 +284,7 @@ export default function App() {
       {/* Sticky Header with Official RydenTec Logo & Multi-Page Navigation */}
       <Navbar
         currentPath={currentPath}
+        introProgress={introProgress}
         onNavigate={navigate}
         onQuoteClick={() => goToContact('Site Institucional')}
       />
