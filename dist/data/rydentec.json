@@ -255,14 +255,62 @@
     }
   ],
   "analytics": {
-    "visits": 41,
+    "visits": 44,
     "uniqueIps": {
-      "::1": 41
+      "::1": 44
     },
     "whatsappClicks": 2,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "hero_replay_motion",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:04:32.737Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:04:16.703Z"
+      },
+      {
+        "event": "hero_stage_mode_desktop",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:04:01.849Z"
+      },
+      {
+        "event": "hero_stage_mode_blueprint",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:03:59.264Z"
+      },
+      {
+        "event": "hero_stage_mode_code",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:03:57.933Z"
+      },
+      {
+        "event": "hero_stage_mode_mobile",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:03:56.384Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:03:51.895Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:03:44.885Z"
+      },
       {
         "event": "pageview",
         "path": "/",
