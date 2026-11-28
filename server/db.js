@@ -121,7 +121,7 @@ const DEFAULT_SETTINGS = {
   heroHeadline: 'We Build Digital Experiences That Move Businesses Forward.',
   heroSupporting: 'From high-performance websites to custom software and intelligent automation, we turn ambitious ideas into powerful digital solutions.',
   contactEmail: 'hello@rydentec.com',
-  whatsappNumber: '+1 (305) 890-2184',
+  whatsappNumber: '+55 (34) 99872-1299',
   whatsappMessage: 'Hi! I found RydenTec online and I\'m interested in discussing a digital project for my business.',
   schedulingUrl: 'https://calendly.com/rydentec/consultation',
   metaPixelId: '',

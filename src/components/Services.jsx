@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
-const WA_NUMBER = '5511989022184';
+const WA_NUMBER = '5534998721299';
 
 export default function Services({ onSelectService, whatsappNumber }) {
   const [selectedId, setSelectedId] = useState('loja-virtual');

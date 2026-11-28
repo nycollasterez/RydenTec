@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
-export default function Navbar({ onQuoteClick }) {
+export default function Navbar({ currentPath = '/', onNavigate, onQuoteClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,28 +15,27 @@ export default function Navbar({ onQuoteClick }) {
   }, []);
 
   const navLinks = [
-    { name: 'Início', href: '#home' },
-    { name: 'Serviços', href: '#services' },
-    { name: 'Nosso Trabalho', href: '#portfolio' },
-    { name: 'Vitrine', href: '#showcase' },
-    { name: 'Como Trabalhamos', href: '#how-we-work' },
-    { name: 'Por que a Ryden', href: '#why-us' },
-    { name: 'Preços', href: '#pricing' },
-    { name: 'Contato', href: '#contact' },
+    { name: 'Início', href: '/' },
+    { name: 'Serviços', href: '/servicos' },
+    { name: 'Nosso Trabalho', href: '/portfolio' },
+    { name: 'Vitrine', href: '/vitrine' },
+    { name: 'Como Trabalhamos', href: '/como-trabalhamos' },
+    { name: 'Por que a Ryden', href: '/por-que-ryden' },
+    { name: 'Preços', href: '/precos' },
+    { name: 'Contato', href: '/contato' },
   ];
 
   const handleLinkClick = (href) => {
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (onNavigate) {
+      onNavigate(href);
     }
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        isScrolled || currentPath !== '/'
           ? 'bg-[#07111F]/90 backdrop-blur-md border-b border-white/10 shadow-lg py-3'
           : 'bg-transparent py-5'
       }`}
@@ -45,31 +44,45 @@ export default function Navbar({ onQuoteClick }) {
         <div className="flex items-center justify-between">
           {/* Brand Logo - Preserving original typography, proportions and visual characteristics */}
           <a
-            href="#home"
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleLinkClick('/');
+            }}
             className="flex items-center group transition-transform duration-200 hover:opacity-95"
           >
             <img
               src="/brand/rydentec-logo.png"
-              alt="RydenTec — Technology That Moves Your Business Forward"
+              alt="RydenTec — Tecnologia Que Impulsiona Seu Negócio"
               className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(8,124,255,0.3)]"
             />
           </a>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
-                className="px-3 py-2 text-sm font-medium text-[#A8B5C7] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = currentPath === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick(link.href);
+                  }}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg hover:bg-white/5 ${
+                    isActive
+                      ? 'text-[#00D5FF] bg-white/5'
+                      : 'text-[#A8B5C7] hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-gradient-to-r from-[#087CFF] to-[#00D5FF] rounded-full"></span>
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Primary Navigation CTA */}
@@ -108,19 +121,26 @@ export default function Navbar({ onQuoteClick }) {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#07111F]/98 border-b border-white/10 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-xl animate-fadeIn">
           <div className="flex flex-col space-y-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
-                className="px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-white/5 transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = currentPath === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick(link.href);
+                  }}
+                  className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#00D5FF] bg-[#087CFF]/15 border border-[#00D5FF]/30'
+                      : 'text-white/90 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             <div className="pt-3">
               <button
                 onClick={() => {

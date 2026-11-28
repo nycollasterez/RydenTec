@@ -8,7 +8,9 @@ import {
   AlertCircle, 
   ArrowRight,
   Clock,
-  Sparkles
+  Sparkles,
+  Instagram,
+  Phone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { submitLead, trackEvent } from '../services/api';
@@ -91,7 +93,7 @@ export default function ContactForm({ selectedService, preselectedService, onCon
 
   const handleWhatsAppFollowup = () => {
     trackEvent('post_lead_whatsapp_click');
-    const cleanNumber = (whatsappNumber || '5511989022184').replace(/[^0-9]/g, '');
+    const cleanNumber = (whatsappNumber || '5534998721299').replace(/[^0-9]/g, '');
     const text = encodeURIComponent(`Olá! Acabei de enviar uma solicitação pelo site para ${formData.fullName} sobre um projeto de ${formData.service}.`);
     window.open(`https://wa.me/${cleanNumber}?text=${text}`, '_blank');
   };
@@ -112,6 +114,28 @@ export default function ContactForm({ selectedService, preselectedService, onCon
           <p className="text-base sm:text-lg text-[#A8B5C7] max-w-2xl mx-auto leading-relaxed">
             Conte-nos sobre a sua visão. Ajudaremos você a construir a solução digital perfeita para os objetivos da sua empresa.
           </p>
+
+          {/* Canais Diretos: WhatsApp & Instagram */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <a
+              href={`https://wa.me/${(whatsappNumber || '5534998721299').replace(/[^0-9]/g, '')}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-[#101F35] border border-emerald-500/30 hover:border-emerald-400 text-xs sm:text-sm font-semibold text-white transition-all"
+            >
+              <Phone className="w-4 h-4 text-emerald-400" />
+              <span>WhatsApp: {whatsappNumber || '+55 (34) 99872-1299'}</span>
+            </a>
+            <a
+              href="https://www.instagram.com/rydentec/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-[#101F35] border border-[#00D5FF]/30 hover:border-[#00D5FF] text-xs sm:text-sm font-semibold text-white transition-all"
+            >
+              <Instagram className="w-4 h-4 text-[#00D5FF]" />
+              <span>Instagram: @rydentec</span>
+            </a>
+          </div>
         </div>
 
         {/* Success State Card */}

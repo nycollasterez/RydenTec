@@ -5,15 +5,28 @@ import {
   MessageSquare, 
   ShieldCheck, 
   Lock,
-  Globe
+  Globe,
+  Instagram,
+  Phone
 } from 'lucide-react';
 
-export default function Footer({ onLegalOpen, onAdminOpen, whatsappNumber, contactEmail }) {
+export default function Footer({ onLegalOpen, onAdminOpen, onNavigate, whatsappNumber, contactEmail, instagramHandle, instagramUrl }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const email = contactEmail || 'hello@rydentec.com';
+  const handleNav = (e, path) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(path);
+    }
+  };
+
+  const email = contactEmail || 'contato@rydentec.com';
+  const waDisplay = whatsappNumber || '+55 (34) 99872-1299';
+  const waClean = waDisplay.replace(/[^0-9]/g, '');
+  const insta = instagramHandle || '@rydentec';
+  const instaLink = instagramUrl || 'https://www.instagram.com/rydentec/';
 
   return (
     <footer className="bg-[#050C16] border-t border-white/10 pt-16 pb-12 relative overflow-hidden">
@@ -24,10 +37,10 @@ export default function Footer({ onLegalOpen, onAdminOpen, whatsappNumber, conta
           
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <a href="#home" className="inline-block">
+            <a href="/" onClick={(e) => handleNav(e, '/')} className="inline-block">
               <img
                 src="/brand/rydentec-logo.png"
-                alt="RydenTec — Technology That Moves Your Business Forward"
+                alt="RydenTec — Tecnologia Que Impulsiona Seu Negócio"
                 className="h-10 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(8,124,255,0.25)]"
               />
             </a>
@@ -40,7 +53,25 @@ export default function Footer({ onLegalOpen, onAdminOpen, whatsappNumber, conta
               Criamos e desenvolvemos sites institucionais de alta performance, lojas virtuais, sistemas sob medida e automações comerciais para empresas que querem crescer com consistência.
             </p>
 
-            <div className="flex items-center space-x-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
+              <a
+                href={`https://wa.me/${waClean}`}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-[#101F35] border border-white/10 hover:border-emerald-500/50 text-xs text-white/90 flex items-center space-x-2 transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{waDisplay}</span>
+              </a>
+              <a
+                href={instaLink}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-[#101F35] border border-white/10 hover:border-[#00D5FF] text-xs text-white/90 flex items-center space-x-2 transition-colors"
+              >
+                <Instagram className="w-3.5 h-3.5 text-[#00D5FF]" />
+                <span>{insta}</span>
+              </a>
               <a
                 href={`mailto:${email}`}
                 className="px-3 py-1.5 rounded-lg bg-[#101F35] border border-white/10 hover:border-[#087CFF] text-xs text-white/90 flex items-center space-x-2 transition-colors"
@@ -57,13 +88,14 @@ export default function Footer({ onLegalOpen, onAdminOpen, whatsappNumber, conta
               Navegação
             </h4>
             <ul className="space-y-2 text-xs text-[#A8B5C7]">
-              <li><a href="#home" className="hover:text-white transition-colors">Início</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Serviços</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition-colors">Nosso Trabalho</a></li>
-              <li><a href="#showcase" className="hover:text-white transition-colors">Vitrine</a></li>
-              <li><a href="#how-we-work" className="hover:text-white transition-colors">Como Trabalhamos</a></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Preços</a></li>
-              <li><a href="#contact" className="hover:text-white transition-colors">Contato</a></li>
+              <li><a href="/" onClick={(e) => handleNav(e, '/')} className="hover:text-white transition-colors">Início</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">Serviços</a></li>
+              <li><a href="/portfolio" onClick={(e) => handleNav(e, '/portfolio')} className="hover:text-white transition-colors">Nosso Trabalho</a></li>
+              <li><a href="/vitrine" onClick={(e) => handleNav(e, '/vitrine')} className="hover:text-white transition-colors">Vitrine</a></li>
+              <li><a href="/como-trabalhamos" onClick={(e) => handleNav(e, '/como-trabalhamos')} className="hover:text-white transition-colors">Como Trabalhamos</a></li>
+              <li><a href="/por-que-ryden" onClick={(e) => handleNav(e, '/por-que-ryden')} className="hover:text-white transition-colors">Por que a Ryden</a></li>
+              <li><a href="/precos" onClick={(e) => handleNav(e, '/precos')} className="hover:text-white transition-colors">Preços</a></li>
+              <li><a href="/contato" onClick={(e) => handleNav(e, '/contato')} className="hover:text-white transition-colors">Contato</a></li>
             </ul>
           </div>
 
@@ -73,11 +105,11 @@ export default function Footer({ onLegalOpen, onAdminOpen, whatsappNumber, conta
               Soluções
             </h4>
             <ul className="space-y-2 text-xs text-[#A8B5C7]">
-              <li><a href="#services" className="hover:text-white transition-colors">Desenvolvimento de Sites</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Software Sob Medida &amp; ERP</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Desenvolvimento de Apps &amp; PWAs</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">IA &amp; Automação Comercial</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Landing Pages de Conversão</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">Desenvolvimento de Sites</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">Lojas Virtuais</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">Software Sob Medida &amp; ERP</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">IA &amp; Automação Comercial</a></li>
+              <li><a href="/servicos" onClick={(e) => handleNav(e, '/servicos')} className="hover:text-white transition-colors">Landing Pages de Conversão</a></li>
             </ul>
           </div>
 

@@ -5,7 +5,7 @@ import { trackEvent } from '../services/api';
 export default function WhatsAppFloating({ whatsappNumber, whatsappMessage }) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const defaultNumber = '+55 (11) 98902-2184';
+  const defaultNumber = '+55 (34) 99872-1299';
   const defaultMsg = 'Olá! Vi o site da RydenTec e gostaria de solicitar um orçamento para o meu negócio.';
 
   const targetNumber = (whatsappNumber || defaultNumber).replace(/[^0-9]/g, '');

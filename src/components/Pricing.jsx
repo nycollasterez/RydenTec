@@ -2,7 +2,7 @@ import React from 'react';
 import { Check, ArrowRight } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
-const DEFAULT_WA_NUMBER = '5511989022184';
+const DEFAULT_WA_NUMBER = '5534998721299';
 
 export default function Pricing({ pricingData, onSelectPlan, whatsappNumber }) {
   const activeNumber = (whatsappNumber || DEFAULT_WA_NUMBER).replace(/[^0-9]/g, '');

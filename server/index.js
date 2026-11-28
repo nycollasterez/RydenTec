@@ -84,6 +84,8 @@ app.get('/api/settings', (req, res) => {
       heroSupporting: db.settings.heroSupporting,
       contactEmail: db.settings.contactEmail,
       whatsappNumber: db.settings.whatsappNumber,
+      instagramHandle: db.settings.instagramHandle || '@rydentec',
+      instagramUrl: db.settings.instagramUrl || 'https://www.instagram.com/rydentec/',
       whatsappMessage: db.settings.whatsappMessage,
       schedulingUrl: db.settings.schedulingUrl,
       metaPixelId: db.settings.metaPixelId,
