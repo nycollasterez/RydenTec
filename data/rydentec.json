@@ -255,14 +255,20 @@
     }
   ],
   "analytics": {
-    "visits": 51,
+    "visits": 52,
     "uniqueIps": {
-      "::1": 51
+      "::1": 52
     },
     "whatsappClicks": 2,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:27:39.115Z"
+      },
       {
         "event": "pageview",
         "path": "/",
