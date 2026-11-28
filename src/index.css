@@ -73,6 +73,39 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes beamHorizontal {
+  0% { transform: translateX(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(200%); opacity: 0; }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-beam-h {
+  animation: beamHorizontal 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-beam-h {
+    animation: none;
+  }
+}
+
 .animate-pulse-slow {
   animation: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

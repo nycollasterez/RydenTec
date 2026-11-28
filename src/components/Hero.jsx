@@ -1,5 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, CheckCircle2, Smartphone, Monitor, Zap, Sparkles, Instagram, Phone } from 'lucide-react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  Smartphone,
+  Monitor,
+  Zap,
+  Sparkles,
+  Instagram,
+  Phone,
+  Code2,
+  Compass,
+  RotateCcw,
+  ExternalLink
+} from 'lucide-react';
 import { trackEvent } from '../services/api';
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -14,31 +27,23 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
   const [elapsed, setElapsed] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [stageMode, setStageMode] = useState('desktop'); // 'desktop' | 'mobile' | 'code' | 'blueprint'
+  const [pointer, setPointer] = useState({ x: 50, y: 40, px: 0, py: 0, active: false });
+  const [cardTilt, setCardTilt] = useState({ rx: 0, ry: 0 });
+  const [runKey, setRunKey] = useState(0);
+
+  const sectionRef = useRef(null);
   const animFrameRef = useRef(null);
   const startTimeRef = useRef(null);
 
-  const DURATION = 4400; // 4.4 segundos
+  const DURATION = 4200; // 4.2 segundos
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (media.matches) {
-        setIsReducedMotion(true);
-        setIsCompleted(true);
-        setElapsed(DURATION);
-        if (onProgressChange) onProgressChange(1);
-        return;
-      }
-    }
-
-    const handleScroll = () => {
-      if (window.scrollY > 100 && !isCompleted) {
-        setIsCompleted(true);
-        setElapsed(DURATION);
-        if (onProgressChange) onProgressChange(1);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+  const runAnimation = useCallback(() => {
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    startTimeRef.current = null;
+    setIsCompleted(false);
+    setElapsed(0);
+    if (onProgressChange) onProgressChange(0);
 
     const step = (timestamp) => {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
@@ -56,56 +61,136 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
     };
 
     animFrameRef.current = requestAnimationFrame(step);
+  }, [onProgressChange]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (media.matches) {
+        setIsReducedMotion(true);
+        setIsCompleted(true);
+        setElapsed(DURATION);
+        if (onProgressChange) onProgressChange(1);
+        return;
+      }
+    }
+
+    runAnimation();
+
+    const handleScroll = () => {
+      if (window.scrollY > 120) {
+        if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+        setIsCompleted(true);
+        setElapsed(DURATION);
+        if (onProgressChange) onProgressChange(1);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isCompleted, onProgressChange]);
+  }, [runKey, runAnimation, onProgressChange]);
 
-  const t = isCompleted || isReducedMotion ? 4.4 : elapsed / 1000;
+  const handleReplay = () => {
+    trackEvent('hero_replay_motion');
+    setStageMode('desktop');
+    setRunKey((k) => k + 1);
+  };
+
+  const handleSectionMouseMove = (e) => {
+    if (!sectionRef.current || isReducedMotion) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    const x = (px / rect.width) * 100;
+    const y = (py / rect.height) * 100;
+    setPointer({ x, y, px, py, active: true });
+  };
+
+  const handleStageMouseMove = (e) => {
+    if (isReducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    setCardTilt({ rx: -ny * 5.5, ry: nx * 6.5 });
+  };
+
+  const handleStageMouseLeave = () => {
+    setCardTilt({ rx: 0, ry: 0 });
+  };
+
+  const t = isCompleted || isReducedMotion ? 4.2 : elapsed / 1000;
 
   // 1. Conexão contínua do cabeçalho para o Hero (0.4s a 1.3s)
-  const headerConnectorHeight = mapRange(t, 0.45, 1.05, 0, 100);
-  const headerConnectorTurn = mapRange(t, 0.95, 1.35, 0, 100);
-  const guidesOpacity = mapRange(t, 0.35, 0.7, 0, 1) * (1 - mapRange(t, 3.6, 4.3, 0, 0.7));
+  const headerConnectorHeight = mapRange(t, 0.4, 1.0, 0, 100);
+  const headerConnectorTurn = mapRange(t, 0.9, 1.3, 0, 100);
+  const guidesOpacity = mapRange(t, 0.3, 0.65, 0, 1) * (1 - mapRange(t, 3.4, 4.1, 0, 0.65));
 
-  // 2. O título ganha forma (0.85s a 2.3s)
-  const baselineOpacity = mapRange(t, 0.8, 1.3, 0, 0.4) * (1 - mapRange(t, 2.0, 2.6, 0, 1));
-  const titleLine1Fill = mapRange(t, 0.85, 1.65, 0, 1);
-  const titleLine2Mask = mapRange(t, 1.35, 2.35, 100, 0);
+  // 2. O título ganha forma (0.8s a 2.2s)
+  const baselineOpacity = mapRange(t, 0.75, 1.2, 0, 0.45) * (1 - mapRange(t, 1.9, 2.5, 0, 1));
+  const titleLine1Fill = mapRange(t, 0.8, 1.55, 0, 1);
+  const titleLine2Mask = mapRange(t, 1.25, 2.25, 100, 0);
 
-  // 3. O botão principal é traçado e preenchido (2.1s a 3.6s)
-  const buttonBorderDash = mapRange(t, 2.1, 3.2, 480, 0);
-  const buttonFillOpacity = mapRange(t, 2.9, 3.6, 0, 1);
-  const buttonContentOpacity = mapRange(t, 2.9, 3.6, 0, 1);
+  // 3. O botão principal é traçado e preenchido (2.0s a 3.4s)
+  const buttonBorderDash = mapRange(t, 2.0, 3.05, 480, 0);
+  const buttonFillOpacity = mapRange(t, 2.75, 3.45, 0, 1);
+  const buttonContentOpacity = mapRange(t, 2.75, 3.45, 0, 1);
 
-  // 4. Subtítulo, botão secundário e canais diretos (2.5s a 3.6s)
-  const supportingOpacity = mapRange(t, 2.4, 3.3, 0, 1);
-  const supportingY = mapRange(t, 2.4, 3.3, 12, 0);
-  const secondaryBtnOpacity = mapRange(t, 2.8, 3.6, 0, 1);
+  // 4. Subtítulo e botão secundário (2.3s a 3.4s)
+  const supportingOpacity = mapRange(t, 2.25, 3.1, 0, 1);
+  const supportingY = mapRange(t, 2.25, 3.1, 12, 0);
+  const secondaryBtnOpacity = mapRange(t, 2.65, 3.45, 0, 1);
 
-  // 5. Pilares de confiança (3.3s a 4.2s)
-  const trustOpacity = mapRange(t, 3.3, 4.2, 0, 1);
-  const trustY = mapRange(t, 3.3, 4.2, 10, 0);
+  // 5. Pilares de confiança (3.15s a 4.0s)
+  const trustOpacity = mapRange(t, 3.15, 4.0, 0, 1);
+  const trustY = mapRange(t, 3.15, 4.0, 10, 0);
 
-  // 6. Estágio visual à direita: Blueprint Wireframe -> Site Final Desktop + Mobile (0.2s a 4.1s)
-  const wireframeOpacity = mapRange(t, 0.15, 0.85, 0, 1) * (1 - mapRange(t, 2.0, 3.2, 0, 0.85));
-  const blueprintScanY = mapRange(t, 0.25, 2.6, 0, 100);
-  const finalBuildOpacity = mapRange(t, 1.9, 3.3, 0, 1);
-  const finalBuildScale = mapRange(t, 1.9, 3.3, 0.96, 1);
-  const mobileCardOpacity = mapRange(t, 2.8, 3.9, 0, 1);
-  const mobileCardY = mapRange(t, 2.8, 3.9, 24, 0);
+  // 6. Estágio visual à direita: Blueprint Wireframe -> Site Construído (0.15s a 3.9s)
+  const wireframeOverlayOpacity =
+    stageMode === 'blueprint'
+      ? 1
+      : mapRange(t, 0.1, 0.75, 0, 1) * (1 - mapRange(t, 1.85, 2.95, 0, 1));
+  const blueprintScanY = mapRange(t, 0.2, 2.4, 0, 100);
+  const finalBuildOpacity = stageMode === 'blueprint' ? 0.12 : mapRange(t, 1.8, 3.1, 0, 1);
+  const finalBuildScale = mapRange(t, 1.8, 3.1, 0.96, 1);
+  const mobileBadgeOpacity = mapRange(t, 2.7, 3.8, 0, 1);
+  const mobileBadgeY = mapRange(t, 2.7, 3.8, 18, 0);
 
   return (
     <section
       id="home"
+      ref={sectionRef}
+      onMouseMove={handleSectionMouseMove}
+      onMouseLeave={() => setPointer((p) => ({ ...p, active: false }))}
       className="relative min-h-screen pt-28 sm:pt-32 lg:pt-28 pb-16 sm:pb-20 overflow-hidden flex items-start lg:items-center bg-[#07111F] text-white"
     >
       {/* Grade arquitetural de fundo contínua com o cabeçalho */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-grid-pattern opacity-35 pointer-events-none"></div>
 
-      {/* Iluminação de fundo */}
+      {/* Spotlight dinâmico seguindo o cursor sobre a grade */}
+      {pointer.active && !isReducedMotion && (
+        <div
+          style={{
+            background: `radial-gradient(520px circle at ${pointer.px}px ${pointer.py}px, rgba(0, 213, 255, 0.11), rgba(8, 124, 255, 0.04) 45%, transparent 75%)`,
+          }}
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0"
+        ></div>
+      )}
+
+      {/* Feixes luminosos sutis percorrendo a malha horizontal */}
+      <div className="absolute top-[28%] left-0 right-0 h-[1px] overflow-hidden pointer-events-none opacity-45">
+        <div className="w-1/3 h-full bg-gradient-to-r from-transparent via-[#00D5FF] to-transparent animate-beam-h"></div>
+      </div>
+      <div className="absolute top-[74%] left-0 right-0 h-[1px] overflow-hidden pointer-events-none opacity-30">
+        <div
+          style={{ animationDelay: '2.4s' }}
+          className="w-1/4 h-full bg-gradient-to-r from-transparent via-[#087CFF] to-transparent animate-beam-h"
+        ></div>
+      </div>
+
+      {/* Iluminação ambiente */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[750px] sm:w-[1100px] h-[520px] bg-gradient-to-b from-[#087CFF]/18 via-[#00D5FF]/8 to-transparent blur-[140px] pointer-events-none rounded-full"></div>
       <div className="absolute bottom-0 right-[-5%] w-[420px] h-[420px] bg-[#087CFF]/15 blur-[130px] pointer-events-none rounded-full"></div>
 
@@ -128,10 +213,10 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
 
       {/* CONTEÚDO PRINCIPAL EM 2 COLUNAS */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center">
           
           {/* COLUNA ESQUERDA: Tipografia, Ações e Pilares */}
-          <div className="lg:col-span-7 space-y-7">
+          <div className="lg:col-span-6 space-y-6 sm:space-y-7">
             
             {/* Título Principal */}
             <div className="relative">
@@ -145,7 +230,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                 </div>
               )}
 
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.3rem] xl:text-[3.9rem] font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.09]">
                 <span
                   style={{
                     opacity: isReducedMotion ? 1 : Math.max(0.3, titleLine1Fill),
@@ -167,7 +252,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                   {!isReducedMotion && titleLine2Mask > 1 && titleLine2Mask < 99 && (
                     <span
                       style={{ right: `${titleLine2Mask}%` }}
-                      className="absolute top-0 bottom-0 w-[2px] bg-[#00D5FF] shadow-[0_0_12px_#00D5FF]"
+                      className="absolute top-0 bottom-0 w-[2px] bg-[#00D5FF] shadow-[0_0_14px_#00D5FF]"
                     ></span>
                   )}
                 </span>
@@ -180,9 +265,9 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                 opacity: isReducedMotion ? 1 : supportingOpacity,
                 transform: `translateY(${isReducedMotion ? 0 : supportingY}px)`,
               }}
-              className="text-sm sm:text-lg text-[#A8B5C7] leading-relaxed max-w-2xl font-normal transition-all duration-100"
+              className="text-sm sm:text-lg text-[#A8B5C7] leading-relaxed max-w-xl font-normal transition-all duration-100"
             >
-              Criamos sites modernos, plataformas e software sob medida projetados especificamente para transformar visitantes casuais em clientes qualificados.
+              Criamos sites modernos, lojas virtuais e sistemas sob medida projetados para transformar visitantes casuais em clientes reais no WhatsApp.
             </p>
 
             {/* Botões Reais */}
@@ -252,7 +337,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
             {/* Links rápidos WhatsApp e Instagram @rydentec */}
             <div
               style={{ opacity: isReducedMotion ? 1 : secondaryBtnOpacity }}
-              className="flex flex-wrap items-center gap-4 text-xs text-[#A8B5C7] pt-1"
+              className="flex flex-wrap items-center gap-4 text-xs text-[#A8B5C7] pt-0.5"
             >
               <a
                 href="https://wa.me/5534998721299"
@@ -287,15 +372,15 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00D5FF] flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs sm:text-sm font-semibold text-white">Feito para o Seu Negócio</h4>
-                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Arquitetura sob medida para seus objetivos comerciais</p>
+                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Sob medida para suas metas reais</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#087CFF] flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-white">Design &amp; Alta Conversão</h4>
-                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Experiências ultra-rápidas para mobile e desktop</p>
+                  <h4 className="text-xs sm:text-sm font-semibold text-white">Design &amp; Conversão</h4>
+                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Velocidade máxima no celular e PC</p>
                 </div>
               </div>
 
@@ -303,121 +388,276 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#00D5FF] flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs sm:text-sm font-semibold text-white">Tecnologia Escalável</h4>
-                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Sistemas prontos para a expansão da empresa</p>
+                  <p className="text-[11px] sm:text-xs text-[#A8B5C7] mt-0.5">Pronto para crescer com sua empresa</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* COLUNA DIREITA: Estágio Visual de Construção (Blueprint -> Desktop + Mobile) */}
-          <div className="lg:col-span-5 relative mt-4 lg:mt-0">
-            <div className="relative rounded-2xl border border-[#00D5FF]/25 bg-[#0B1730]/80 backdrop-blur-xl p-4 sm:p-5 shadow-[0_20px_60px_rgba(0,0,0,0.55)] overflow-hidden">
-              
-              {/* Camada 1: Blueprint Wireframe + Laser Scan */}
-              {wireframeOpacity > 0.02 && (
-                <div
-                  style={{ opacity: isReducedMotion ? 0 : wireframeOpacity }}
-                  className="absolute inset-0 z-20 pointer-events-none bg-[#07111F]/90 p-4"
+          {/* COLUNA DIREITA: Estágio Interativo 3D de Construção Digital */}
+          <div
+            className="lg:col-span-6 relative mt-2 lg:mt-0"
+            style={{ perspective: '1200px' }}
+          >
+            <div
+              onMouseMove={handleStageMouseMove}
+              onMouseLeave={handleStageMouseLeave}
+              style={{
+                transform: `rotateX(${cardTilt.rx}deg) rotateY(${cardTilt.ry}deg)`,
+                transition: 'transform 0.18s ease-out',
+              }}
+              className="relative rounded-2xl border border-[#00D5FF]/30 bg-[#0B1730]/85 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden"
+            >
+              {/* Barra de Controle Superior do Estúdio */}
+              <div className="px-4 py-3 bg-[#07111F]/90 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 relative z-30">
+                <div className="flex items-center space-x-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  <span className="ml-2 text-[10px] font-mono text-[#A8B5C7] hidden sm:inline">
+                    rydentec.build
+                  </span>
+                </div>
+
+                {/* Alternador ao vivo dentro do Hero */}
+                <div className="flex items-center bg-[#101F35] p-0.5 rounded-lg border border-white/10 text-[11px]">
+                  {[
+                    { id: 'desktop', label: 'Site', icon: Monitor },
+                    { id: 'mobile', label: 'Celular', icon: Smartphone },
+                    { id: 'code', label: 'Código', icon: Code2 },
+                    { id: 'blueprint', label: 'Blueprint', icon: Compass },
+                  ].map((tab) => {
+                    const Icon = tab.icon;
+                    const active = stageMode === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => {
+                          setStageMode(tab.id);
+                          trackEvent(`hero_stage_mode_${tab.id}`);
+                        }}
+                        className={`flex items-center space-x-1 px-2.5 py-1 rounded-md font-semibold transition-all cursor-pointer ${
+                          active
+                            ? 'bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white shadow-sm'
+                            : 'text-[#A8B5C7] hover:text-white'
+                        }`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        <span>{tab.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Botão Replay da Construção */}
+                <button
+                  type="button"
+                  onClick={handleReplay}
+                  title="Assistir construção novamente"
+                  className="p-1.5 rounded-lg bg-[#101F35] border border-white/10 text-[#00D5FF] hover:text-white hover:border-[#00D5FF]/60 transition-colors cursor-pointer"
                 >
-                  <svg className="w-full h-full" viewBox="0 0 480 340" fill="none">
-                    <rect x="8" y="8" width="464" height="324" rx="12" stroke="#00D5FF" strokeWidth="1.2" strokeDasharray="6 4" strokeOpacity="0.55" />
-                    <line x1="8" y1="46" x2="472" y2="46" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.6" />
-                    <circle cx="28" cy="27" r="4" stroke="#00D5FF" strokeWidth="1.2" />
-                    <circle cx="44" cy="27" r="4" stroke="#00D5FF" strokeWidth="1.2" />
-                    <circle cx="60" cy="27" r="4" stroke="#00D5FF" strokeWidth="1.2" />
-                    <rect x="28" y="72" width="240" height="24" rx="5" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.7" />
-                    <rect x="28" y="108" width="190" height="14" rx="3" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.45" />
-                    <rect x="28" y="140" width="120" height="34" rx="8" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.8" />
-                    <rect x="28" y="200" width="130" height="100" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.45" />
-                    <rect x="174" y="200" width="130" height="100" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.45" />
-                    <rect x="320" y="90" width="132" height="210" rx="16" stroke="#00D5FF" strokeWidth="1.4" strokeDasharray="5 3" strokeOpacity="0.7" />
-                  </svg>
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Área Dinâmica do Palco */}
+              <div className="relative p-4 sm:p-6 min-h-[340px] sm:min-h-[360px] flex flex-col justify-between">
+                
+                {/* Camada 1: Blueprint Wireframe + Scanner Laser */}
+                {wireframeOverlayOpacity > 0.02 && (
                   <div
-                    style={{ top: `${blueprintScanY}%` }}
-                    className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00D5FF] to-transparent shadow-[0_0_16px_#00D5FF]"
-                  ></div>
-                </div>
-              )}
-
-              {/* Camada 2: Site Construído (Desktop Preview) */}
-              <div
-                style={{
-                  opacity: isReducedMotion ? 1 : Math.max(0.15, finalBuildOpacity),
-                  transform: `scale(${isReducedMotion ? 1 : finalBuildScale})`,
-                }}
-                className="relative z-10 space-y-4 transition-all duration-200"
-              >
-                {/* Barra superior do navegador */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <div className="flex items-center space-x-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    style={{ opacity: isReducedMotion && stageMode !== 'blueprint' ? 0 : wireframeOverlayOpacity }}
+                    className="absolute inset-0 z-20 pointer-events-none bg-[#07111F]/92 p-5"
+                  >
+                    <svg className="w-full h-full" viewBox="0 0 480 310" fill="none">
+                      <defs>
+                        <pattern id="stage-bp-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#00D5FF" strokeWidth="0.4" strokeOpacity="0.25" />
+                        </pattern>
+                      </defs>
+                      <rect width="480" height="310" fill="url(#stage-bp-grid)" />
+                      <rect x="8" y="8" width="464" height="294" rx="12" stroke="#00D5FF" strokeWidth="1.2" strokeDasharray="6 4" strokeOpacity="0.6" />
+                      <rect x="26" y="34" width="240" height="22" rx="5" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.8" />
+                      <rect x="26" y="70" width="190" height="12" rx="3" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.55" />
+                      <rect x="26" y="102" width="124" height="32" rx="8" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.85" />
+                      <rect x="26" y="160" width="132" height="114" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.5" />
+                      <rect x="172" y="160" width="132" height="114" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.5" />
+                      <rect x="322" y="42" width="132" height="232" rx="16" stroke="#00D5FF" strokeWidth="1.5" strokeDasharray="5 3" strokeOpacity="0.8" />
+                      <text x="26" y="290" fill="#00D5FF" fontSize="9.5" fontFamily="monospace" opacity="0.85">
+                        GRID_12COL // RESPONSIVE_VIEWPORT // RENDER_OK
+                      </text>
+                    </svg>
+                    <div
+                      style={{
+                        top: stageMode === 'blueprint' ? '50%' : `${blueprintScanY}%`,
+                      }}
+                      className={`absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00D5FF] to-transparent shadow-[0_0_18px_#00D5FF] ${
+                        stageMode === 'blueprint' ? 'animate-pulse' : ''
+                      }`}
+                    ></div>
                   </div>
-                  <div className="px-3 py-1 rounded-full bg-[#07111F] border border-white/10 text-[10px] font-mono text-[#A8B5C7] flex items-center space-x-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                    <span>rydentec.com</span>
-                  </div>
-                  <Monitor className="w-4 h-4 text-[#00D5FF]" />
-                </div>
+                )}
 
-                {/* Conteúdo do preview */}
-                <div className="p-4 rounded-xl bg-gradient-to-br from-[#101F35] to-[#07111F] border border-white/10 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#00D5FF] flex items-center space-x-1">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>Arquitetura de Conversão</span>
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                      99 Lighthouse
-                    </span>
-                  </div>
+                {/* Camada 2A: Modo SITE (Desktop) */}
+                {stageMode === 'desktop' && (
+                  <div
+                    style={{
+                      opacity: isReducedMotion ? 1 : Math.max(0.15, finalBuildOpacity),
+                      transform: `scale(${isReducedMotion ? 1 : finalBuildScale})`,
+                    }}
+                    className="relative z-10 space-y-4 transition-all duration-200 animate-fadeIn"
+                  >
+                    <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-[#101F35] to-[#07111F] border border-white/10 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#00D5FF] flex items-center space-x-1.5">
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>Arquitetura de Alta Conversão</span>
+                        </span>
+                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                          99 Lighthouse
+                        </span>
+                      </div>
 
-                  <div className="space-y-1.5">
-                    <div className="text-base sm:text-lg font-extrabold text-white leading-snug">
-                      Presença digital desenhada para vender todos os dias.
-                    </div>
-                    <p className="text-xs text-[#A8B5C7]">
-                      Integração nativa com WhatsApp, SEO técnico e velocidade extrema.
-                    </p>
-                  </div>
+                      <div className="space-y-1.5">
+                        <div className="text-base sm:text-xl font-extrabold text-white leading-snug">
+                          Presença digital desenhada para vender todos os dias.
+                        </div>
+                        <p className="text-xs text-[#A8B5C7] leading-relaxed">
+                          Design exclusivo, SEO técnico no Google e atendimento instantâneo direto no seu WhatsApp.
+                        </p>
+                      </div>
 
-                  {/* Mini métricas */}
-                  <div className="grid grid-cols-3 gap-2 pt-1">
-                    <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                      <div className="text-[10px] text-[#A8B5C7]">Velocidade</div>
-                      <div className="text-xs sm:text-sm font-bold text-[#00D5FF] mt-0.5 flex items-center space-x-1">
-                        <Zap className="w-3 h-3" />
-                        <span>&lt; 0.6s</span>
+                      {/* Barras de performance animadas */}
+                      <div className="grid grid-cols-3 gap-2.5 pt-1">
+                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
+                          <div className="text-[10px] text-[#A8B5C7]">Carregamento</div>
+                          <div className="text-xs sm:text-sm font-bold text-[#00D5FF] mt-0.5 flex items-center space-x-1">
+                            <Zap className="w-3 h-3" />
+                            <span>&lt; 0.6s</span>
+                          </div>
+                        </div>
+                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
+                          <div className="text-[10px] text-[#A8B5C7]">Responsivo</div>
+                          <div className="text-xs sm:text-sm font-bold text-white mt-0.5">PC &amp; Celular</div>
+                        </div>
+                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
+                          <div className="text-[10px] text-[#A8B5C7]">Conversão</div>
+                          <div className="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">WhatsApp VIP</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                      <div className="text-[10px] text-[#A8B5C7]">Responsivo</div>
-                      <div className="text-xs sm:text-sm font-bold text-white mt-0.5">Desktop &amp; App</div>
-                    </div>
-                    <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                      <div className="text-[10px] text-[#A8B5C7]">Conversão</div>
-                      <div className="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">WhatsApp VIP</div>
+
+                    {/* Cliente real em destaque */}
+                    <div className="p-3.5 rounded-xl bg-[#07111F]/80 border border-white/10 flex items-center justify-between gap-3">
+                      <div className="flex items-center space-x-3">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">
+                            Projeto Real no Ar
+                          </div>
+                          <div className="text-xs font-bold text-white">Honorato Barber Shop</div>
+                        </div>
+                      </div>
+                      <a
+                        href="https://www.honoratobarbershop.com.br/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3 py-1.5 rounded-lg bg-[#101F35] hover:bg-[#087CFF] border border-white/10 text-[11px] font-semibold text-white inline-flex items-center space-x-1 transition-colors"
+                      >
+                        <span>Visitar</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
                     </div>
                   </div>
-                </div>
+                )}
 
-                {/* Rodapé do card + Mini preview mobile acoplado */}
-                <div className="flex items-center justify-between gap-3 pt-1">
+                {/* Camada 2B: Modo CELULAR (Mobile Mockup ao vivo) */}
+                {stageMode === 'mobile' && (
+                  <div className="relative z-10 flex justify-center animate-fadeIn">
+                    <div className="w-[245px] rounded-[28px] bg-[#07111F] border-[5px] border-[#101F35] p-3.5 shadow-2xl space-y-3">
+                      <div className="w-16 h-2.5 bg-black rounded-full mx-auto"></div>
+                      <div className="flex items-center justify-between text-[10px] pt-1">
+                        <span className="font-bold text-white">RydenTec Mobile</span>
+                        <span className="text-emerald-400 font-mono">100% Fluido</span>
+                      </div>
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-[#101F35] to-[#07111F] border border-[#00D5FF]/30 space-y-1.5">
+                        <div className="text-xs font-extrabold text-white leading-tight">
+                          Seu cliente resolve tudo em 1 toque.
+                        </div>
+                        <p className="text-[10px] text-[#A8B5C7]">
+                          Botões ergonômicos, menu ágil e orçamento direto no WhatsApp.
+                        </p>
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="p-2 rounded-lg bg-[#101F35] border border-white/5 text-[11px] text-white flex justify-between">
+                          <span>Loja Virtual Pix</span>
+                          <span className="text-[#00D5FF]">→</span>
+                        </div>
+                        <div className="p-2 rounded-lg bg-[#101F35] border border-white/5 text-[11px] text-white flex justify-between">
+                          <span>Agendamento Rápido</span>
+                          <span className="text-[#00D5FF]">→</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={onStartProject}
+                        className="w-full py-2 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white text-[11px] font-bold cursor-pointer"
+                      >
+                        Pedir Orçamento Agora
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Camada 2C: Modo CÓDIGO (Engenharia RydenTec) */}
+                {stageMode === 'code' && (
+                  <div className="relative z-10 rounded-xl bg-[#050C16] border border-white/10 p-4 font-mono text-[11px] leading-relaxed text-[#A8B5C7] space-y-1.5 animate-fadeIn">
+                    <div className="text-[#00D5FF] font-semibold mb-2">
+                      // rydentec-engine.config.ts
+                    </div>
+                    <div>
+                      <span className="text-purple-400">export const</span>{' '}
+                      <span className="text-white">projeto</span> = {'{'}
+                    </div>
+                    <div className="pl-4">
+                      stack: <span className="text-emerald-400">&apos;React 18 + Tailwind + API Rápida&apos;</span>,
+                    </div>
+                    <div className="pl-4">
+                      performance: <span className="text-[#00D5FF]">99</span>,
+                    </div>
+                    <div className="pl-4">
+                      mobileFirst: <span className="text-amber-300">true</span>,
+                    </div>
+                    <div className="pl-4">
+                      seoGoogle: <span className="text-emerald-400">&apos;Schema.org + Sitemap + GZIP&apos;</span>,
+                    </div>
+                    <div className="pl-4">
+                      conversao: <span className="text-emerald-400">&apos;WhatsApp +55 (34) 99872-1299&apos;</span>,
+                    </div>
+                    <div>{'}'};</div>
+                    <div className="pt-3 text-[10px] text-emerald-400 flex items-center space-x-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                      <span>Build pronto para produção e alta escala</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Rodapé fixo do palco */}
+                <div className="flex items-center justify-between gap-3 pt-4 mt-2 border-t border-white/10 relative z-10">
                   <button
                     onClick={() => {
                       if (onExploreShowcase) onExploreShowcase();
                     }}
                     className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#00D5FF] hover:text-white transition-colors cursor-pointer"
                   >
-                    <span>Explorar vitrine interativa</span>
+                    <span>Abrir vitrine completa</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
 
                   <div
                     style={{
-                      opacity: isReducedMotion ? 1 : mobileCardOpacity,
-                      transform: `translateY(${isReducedMotion ? 0 : mobileCardY}px)`,
+                      opacity: isReducedMotion ? 1 : mobileBadgeOpacity,
+                      transform: `translateY(${isReducedMotion ? 0 : mobileBadgeY}px)`,
                     }}
                     className="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#07111F] border border-[#00D5FF]/35 shadow-lg transition-all duration-200"
                   >
@@ -426,7 +666,6 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 

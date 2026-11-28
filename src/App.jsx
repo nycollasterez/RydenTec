@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Layers, Briefcase, Monitor, Compass, ShieldCheck, Tag, MessageSquare } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import HomeExploreBento from './components/HomeExploreBento';
 import Services from './components/Services';
 import Showcase from './components/Showcase';
 import Portfolio from './components/Portfolio';
@@ -23,16 +23,6 @@ const normalizePath = (rawPath) => {
   const trimmed = rawPath.replace(/\/+$/, '');
   return trimmed || '/';
 };
-
-const QUICK_PAGES = [
-  { path: '/servicos', title: 'Serviços', desc: 'Sites, lojas virtuais, landing pages e software sob medida.', icon: Layers },
-  { path: '/portfolio', title: 'Nosso Trabalho', desc: 'Projetos reais em produção e soluções sob medida.', icon: Briefcase },
-  { path: '/vitrine', title: 'Vitrine Interativa', desc: 'Teste demonstrações no computador e no celular.', icon: Monitor },
-  { path: '/como-trabalhamos', title: 'Como Trabalhamos', desc: 'Do primeiro contato à entrega final em 5 etapas.', icon: Compass },
-  { path: '/por-que-ryden', title: 'Por que a Ryden', desc: 'Engenharia, design com propósito e foco em escala.', icon: ShieldCheck },
-  { path: '/precos', title: 'Preços', desc: 'Planos transparentes e orçamento sob consulta.', icon: Tag },
-  { path: '/contato', title: 'Contato', desc: 'Solicite um orçamento gratuito ou fale no WhatsApp.', icon: MessageSquare },
-];
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => normalizePath(window.location.pathname));
@@ -226,54 +216,12 @@ export default function App() {
               onProgressChange={setIntroProgress}
             />
 
-            {/* Acesso limpo e direto às páginas separadas */}
-            <section className="py-16 sm:py-20 bg-[#07111F] border-t border-white/5">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Explore a <span className="gradient-text">RydenTec</span>
-                    </h2>
-                    <p className="text-sm text-[#A8B5C7] mt-1">
-                      Navegue diretamente pela página que você precisa.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {QUICK_PAGES.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <a
-                        key={item.path}
-                        href={item.path}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigate(item.path);
-                        }}
-                        className="group p-5 rounded-2xl bg-[#0B1730]/80 border border-white/10 hover:border-[#00D5FF]/60 hover:bg-[#101F35] transition-all duration-200 flex flex-col justify-between"
-                      >
-                        <div>
-                          <div className="w-10 h-10 rounded-xl bg-[#07111F] border border-[#087CFF]/30 flex items-center justify-center text-[#00D5FF] mb-4 group-hover:scale-105 transition-transform">
-                            <Icon className="w-5 h-5" />
-                          </div>
-                          <h3 className="text-base font-bold text-white group-hover:text-[#00D5FF] transition-colors">
-                            {item.title}
-                          </h3>
-                          <p className="text-xs text-[#A8B5C7] mt-1.5 leading-relaxed">
-                            {item.desc}
-                          </p>
-                        </div>
-                        <div className="mt-4 pt-3 border-t border-white/5 flex items-center text-xs font-semibold text-[#00D5FF]">
-                          <span>Acessar página</span>
-                          <ArrowRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
+            <HomeExploreBento
+              onNavigate={navigate}
+              whatsappNumber={settings?.whatsappNumber}
+              instagramHandle={settings?.instagramHandle}
+              instagramUrl={settings?.instagramUrl}
+            />
           </main>
         );
     }
