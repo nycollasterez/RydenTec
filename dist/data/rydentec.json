@@ -255,14 +255,74 @@
     }
   ],
   "analytics": {
-    "visits": 34,
+    "visits": 41,
     "uniqueIps": {
-      "::1": 34
+      "::1": 41
     },
     "whatsappClicks": 2,
     "quoteRequests": 2,
     "consultationClicks": 0,
     "events": [
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:00:54.867Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T06:00:48.800Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:58:37.830Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:57:30.979Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/como-trabalhamos",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:57:22.121Z"
+      },
+      {
+        "event": "showcase_concept_switch_detailing",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:57:18.872Z"
+      },
+      {
+        "event": "showcase_device_toggle_desktop",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:57:13.624Z"
+      },
+      {
+        "event": "showcase_device_toggle_mobile",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:57:11.636Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/vitrine",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:56:54.603Z"
+      },
+      {
+        "event": "pageview",
+        "path": "/",
+        "referrer": "direct",
+        "timestamp": "2026-11-28T05:56:34.220Z"
+      },
       {
         "event": "pageview",
         "path": "/",

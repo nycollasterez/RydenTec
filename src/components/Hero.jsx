@@ -4,14 +4,11 @@ import {
   CheckCircle2,
   Smartphone,
   Monitor,
-  Zap,
-  Sparkles,
   Instagram,
   Phone,
   Code2,
   Compass,
-  RotateCcw,
-  ExternalLink
+  RotateCcw
 } from 'lucide-react';
 import { trackEvent } from '../services/api';
 
@@ -23,12 +20,18 @@ const mapRange = (v, inMin, inMax, outMin, outMax) => {
   return lerp(outMin, outMax, easeInOut(t));
 };
 
+const ARCH_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop',
+  card1: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&auto=format&fit=crop',
+  card2: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80&auto=format&fit=crop',
+};
+
 export default function Hero({ onStartProject, onExploreServices, onExploreShowcase, onProgressChange }) {
   const [elapsed, setElapsed] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [stageMode, setStageMode] = useState('desktop'); // 'desktop' | 'mobile' | 'code' | 'blueprint'
-  const [pointer, setPointer] = useState({ x: 50, y: 40, px: 0, py: 0, active: false });
+  const [pointer, setPointer] = useState({ px: 0, py: 0, active: false });
   const [cardTilt, setCardTilt] = useState({ rx: 0, ry: 0 });
   const [runKey, setRunKey] = useState(0);
 
@@ -102,11 +105,11 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
   const handleSectionMouseMove = (e) => {
     if (!sectionRef.current || isReducedMotion) return;
     const rect = sectionRef.current.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
-    const x = (px / rect.width) * 100;
-    const y = (py / rect.height) * 100;
-    setPointer({ x, y, px, py, active: true });
+    setPointer({
+      px: e.clientX - rect.left,
+      py: e.clientY - rect.top,
+      active: true,
+    });
   };
 
   const handleStageMouseMove = (e) => {
@@ -114,7 +117,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
     const rect = e.currentTarget.getBoundingClientRect();
     const nx = (e.clientX - rect.left) / rect.width - 0.5;
     const ny = (e.clientY - rect.top) / rect.height - 0.5;
-    setCardTilt({ rx: -ny * 5.5, ry: nx * 6.5 });
+    setCardTilt({ rx: -ny * 5, ry: nx * 6 });
   };
 
   const handleStageMouseLeave = () => {
@@ -147,16 +150,24 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
   const trustOpacity = mapRange(t, 3.15, 4.0, 0, 1);
   const trustY = mapRange(t, 3.15, 4.0, 10, 0);
 
-  // 6. Estágio visual à direita: Blueprint Wireframe -> Site Construído (0.15s a 3.9s)
-  const wireframeOverlayOpacity =
-    stageMode === 'blueprint'
-      ? 1
-      : mapRange(t, 0.1, 0.75, 0, 1) * (1 - mapRange(t, 1.85, 2.95, 0, 1));
-  const blueprintScanY = mapRange(t, 0.2, 2.4, 0, 100);
-  const finalBuildOpacity = stageMode === 'blueprint' ? 0.12 : mapRange(t, 1.8, 3.1, 0, 1);
-  const finalBuildScale = mapRange(t, 1.8, 3.1, 0.96, 1);
-  const mobileBadgeOpacity = mapRange(t, 2.7, 3.8, 0, 1);
-  const mobileBadgeY = mapRange(t, 2.7, 3.8, 18, 0);
+  // 6. Coreografia da Landing Page de Arquitetura sendo montada peça por peça (0.3s a 3.9s)
+  const archFrameOpacity = mapRange(t, 0.15, 0.6, 0, 1);
+  const archNavOpacity = mapRange(t, 0.45, 1.1, 0, 1);
+  const archNavY = mapRange(t, 0.45, 1.1, -10, 0);
+  const archNavLine = mapRange(t, 0.55, 1.25, 0, 100);
+
+  const archTextOpacity = mapRange(t, 1.1, 1.95, 0, 1);
+  const archTextY = mapRange(t, 1.1, 1.95, 14, 0);
+  const archCtaOpacity = mapRange(t, 1.65, 2.3, 0, 1);
+
+  const archHeroPhotoMask = mapRange(t, 1.15, 2.35, 100, 0); // wipe horizontal revelando foto da casa
+  const archCard1Opacity = mapRange(t, 2.3, 3.1, 0, 1);
+  const archCard1Y = mapRange(t, 2.3, 3.1, 18, 0);
+  const archCard2Opacity = mapRange(t, 2.65, 3.55, 0, 1);
+  const archCard2Y = mapRange(t, 2.65, 3.55, 18, 0);
+
+  const mobileBadgeOpacity = mapRange(t, 3.0, 3.9, 0, 1);
+  const mobileBadgeY = mapRange(t, 3.0, 3.9, 14, 0);
 
   return (
     <section
@@ -394,7 +405,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
             </div>
           </div>
 
-          {/* COLUNA DIREITA: Estágio Interativo 3D de Construção Digital */}
+          {/* COLUNA DIREITA: Landing Page de Arquitetura sendo montada ao vivo */}
           <div
             className="lg:col-span-6 relative mt-2 lg:mt-0"
             style={{ perspective: '1200px' }}
@@ -403,23 +414,24 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
               onMouseMove={handleStageMouseMove}
               onMouseLeave={handleStageMouseLeave}
               style={{
+                opacity: isReducedMotion ? 1 : Math.max(0.4, archFrameOpacity),
                 transform: `rotateX(${cardTilt.rx}deg) rotateY(${cardTilt.ry}deg)`,
                 transition: 'transform 0.18s ease-out',
               }}
-              className="relative rounded-2xl border border-[#00D5FF]/30 bg-[#0B1730]/85 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden"
+              className="relative rounded-2xl border border-[#00D5FF]/30 bg-[#0B1730]/90 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden"
             >
               {/* Barra de Controle Superior do Estúdio */}
-              <div className="px-4 py-3 bg-[#07111F]/90 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 relative z-30">
+              <div className="px-4 py-3 bg-[#07111F]/95 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 relative z-30">
                 <div className="flex items-center space-x-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                   <span className="ml-2 text-[10px] font-mono text-[#A8B5C7] hidden sm:inline">
-                    rydentec.build
+                    verticearquitetura.com.br
                   </span>
                 </div>
 
-                {/* Alternador ao vivo dentro do Hero */}
+                {/* Alternador ao vivo */}
                 <div className="flex items-center bg-[#101F35] p-0.5 rounded-lg border border-white/10 text-[11px]">
                   {[
                     { id: 'desktop', label: 'Site', icon: Monitor },
@@ -454,196 +466,236 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                 <button
                   type="button"
                   onClick={handleReplay}
-                  title="Assistir construção novamente"
+                  title="Montar novamente"
                   className="p-1.5 rounded-lg bg-[#101F35] border border-white/10 text-[#00D5FF] hover:text-white hover:border-[#00D5FF]/60 transition-colors cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              {/* Área Dinâmica do Palco */}
-              <div className="relative p-4 sm:p-6 min-h-[340px] sm:min-h-[360px] flex flex-col justify-between">
+              {/* Área da Landing Page de Arquitetura */}
+              <div className="relative p-4 sm:p-5 min-h-[365px] flex flex-col justify-between bg-[#090D16]">
                 
-                {/* Camada 1: Blueprint Wireframe + Scanner Laser */}
-                {wireframeOverlayOpacity > 0.02 && (
-                  <div
-                    style={{ opacity: isReducedMotion && stageMode !== 'blueprint' ? 0 : wireframeOverlayOpacity }}
-                    className="absolute inset-0 z-20 pointer-events-none bg-[#07111F]/92 p-5"
-                  >
-                    <svg className="w-full h-full" viewBox="0 0 480 310" fill="none">
-                      <defs>
-                        <pattern id="stage-bp-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#00D5FF" strokeWidth="0.4" strokeOpacity="0.25" />
-                        </pattern>
-                      </defs>
-                      <rect width="480" height="310" fill="url(#stage-bp-grid)" />
-                      <rect x="8" y="8" width="464" height="294" rx="12" stroke="#00D5FF" strokeWidth="1.2" strokeDasharray="6 4" strokeOpacity="0.6" />
-                      <rect x="26" y="34" width="240" height="22" rx="5" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.8" />
-                      <rect x="26" y="70" width="190" height="12" rx="3" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.55" />
-                      <rect x="26" y="102" width="124" height="32" rx="8" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.85" />
-                      <rect x="26" y="160" width="132" height="114" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.5" />
-                      <rect x="172" y="160" width="132" height="114" rx="8" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.5" />
-                      <rect x="322" y="42" width="132" height="232" rx="16" stroke="#00D5FF" strokeWidth="1.5" strokeDasharray="5 3" strokeOpacity="0.8" />
-                      <text x="26" y="290" fill="#00D5FF" fontSize="9.5" fontFamily="monospace" opacity="0.85">
-                        GRID_12COL // RESPONSIVE_VIEWPORT // RENDER_OK
-                      </text>
-                    </svg>
+                {/* MODO SITE (Desktop — Landing Page de Arquitetura montando peça a peça) */}
+                {stageMode === 'desktop' && (
+                  <div className="relative z-10 rounded-xl border border-white/10 bg-[#0D111A] overflow-hidden shadow-inner">
+                    
+                    {/* 1. Cabeçalho da Landing Page de Arquitetura */}
                     <div
                       style={{
-                        top: stageMode === 'blueprint' ? '50%' : `${blueprintScanY}%`,
+                        opacity: isReducedMotion ? 1 : archNavOpacity,
+                        transform: `translateY(${isReducedMotion ? 0 : archNavY}px)`,
                       }}
-                      className={`absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00D5FF] to-transparent shadow-[0_0_18px_#00D5FF] ${
-                        stageMode === 'blueprint' ? 'animate-pulse' : ''
-                      }`}
-                    ></div>
-                  </div>
-                )}
-
-                {/* Camada 2A: Modo SITE (Desktop) */}
-                {stageMode === 'desktop' && (
-                  <div
-                    style={{
-                      opacity: isReducedMotion ? 1 : Math.max(0.15, finalBuildOpacity),
-                      transform: `scale(${isReducedMotion ? 1 : finalBuildScale})`,
-                    }}
-                    className="relative z-10 space-y-4 transition-all duration-200 animate-fadeIn"
-                  >
-                    <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-[#101F35] to-[#07111F] border border-white/10 space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#00D5FF] flex items-center space-x-1.5">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          <span>Arquitetura de Alta Conversão</span>
-                        </span>
-                        <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                          99 Lighthouse
+                      className="relative px-4 py-3 flex items-center justify-between bg-[#111622]/95"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <span className="w-2.5 h-2.5 border border-[#D4AF37] rotate-45 inline-block"></span>
+                        <span className="text-[11px] font-bold tracking-[0.2em] text-white uppercase">
+                          VÉRTICE <span className="text-[#D4AF37] font-light">ARQ</span>
                         </span>
                       </div>
-
-                      <div className="space-y-1.5">
-                        <div className="text-base sm:text-xl font-extrabold text-white leading-snug">
-                          Presença digital desenhada para vender todos os dias.
-                        </div>
-                        <p className="text-xs text-[#A8B5C7] leading-relaxed">
-                          Design exclusivo, SEO técnico no Google e atendimento instantâneo direto no seu WhatsApp.
-                        </p>
+                      <div className="hidden sm:flex items-center space-x-4 text-[10px] tracking-wide text-white/70">
+                        <span>Projetos</span>
+                        <span>Estúdio</span>
+                        <span className="text-[#D4AF37] font-semibold">Orçamento</span>
                       </div>
-
-                      {/* Barras de performance animadas */}
-                      <div className="grid grid-cols-3 gap-2.5 pt-1">
-                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                          <div className="text-[10px] text-[#A8B5C7]">Carregamento</div>
-                          <div className="text-xs sm:text-sm font-bold text-[#00D5FF] mt-0.5 flex items-center space-x-1">
-                            <Zap className="w-3 h-3" />
-                            <span>&lt; 0.6s</span>
-                          </div>
-                        </div>
-                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                          <div className="text-[10px] text-[#A8B5C7]">Responsivo</div>
-                          <div className="text-xs sm:text-sm font-bold text-white mt-0.5">PC &amp; Celular</div>
-                        </div>
-                        <div className="p-2.5 rounded-lg bg-[#07111F]/90 border border-white/5">
-                          <div className="text-[10px] text-[#A8B5C7]">Conversão</div>
-                          <div className="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5">WhatsApp VIP</div>
-                        </div>
-                      </div>
+                      {/* Linha guia ciano se desenhando na base do mini cabeçalho */}
+                      <div
+                        style={{ width: `${isReducedMotion ? 100 : archNavLine}%` }}
+                        className="absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-[#00D5FF]/70 via-[#D4AF37]/50 to-transparent"
+                      ></div>
                     </div>
 
-                    {/* Cliente real em destaque */}
-                    <div className="p-3.5 rounded-xl bg-[#07111F]/80 border border-white/10 flex items-center justify-between gap-3">
-                      <div className="flex items-center space-x-3">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <div>
-                          <div className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">
-                            Projeto Real no Ar
-                          </div>
-                          <div className="text-xs font-bold text-white">Honorato Barber Shop</div>
-                        </div>
-                      </div>
-                      <a
-                        href="https://www.honoratobarbershop.com.br/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-3 py-1.5 rounded-lg bg-[#101F35] hover:bg-[#087CFF] border border-white/10 text-[11px] font-semibold text-white inline-flex items-center space-x-1 transition-colors"
+                    {/* 2. Dobra Principal da Landing Page (Texto + Foto Arquitetônica sendo revelada) */}
+                    <div className="p-4 grid grid-cols-12 gap-4 items-center">
+                      {/* Texto editorial à esquerda */}
+                      <div
+                        style={{
+                          opacity: isReducedMotion ? 1 : archTextOpacity,
+                          transform: `translateY(${isReducedMotion ? 0 : archTextY}px)`,
+                        }}
+                        className="col-span-6 space-y-2.5"
                       >
-                        <span>Visitar</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
+                        <div className="text-[9px] font-mono uppercase tracking-[0.22em] text-[#D4AF37]">
+                          Arquitetura Contemporânea
+                        </div>
+                        <h3 className="text-sm sm:text-base font-bold text-white leading-snug tracking-tight">
+                          Espaços que unem luz, forma e propósito.
+                        </h3>
+                        <p className="text-[10px] text-white/60 leading-relaxed hidden sm:block">
+                          Residências autorais e pavilhões corporativos de alto padrão em todo o Brasil.
+                        </p>
+                        <div
+                          style={{ opacity: isReducedMotion ? 1 : archCtaOpacity }}
+                          className="pt-1"
+                        >
+                          <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded bg-[#D4AF37] text-[#090D16] text-[10px] font-bold tracking-wide">
+                            <span>Ver Portfólio</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Foto da Casa Moderna revelando com máscara de construção */}
+                      <div className="col-span-6 relative">
+                        <div className="relative h-32 sm:h-36 rounded-lg overflow-hidden border border-white/10 bg-[#151C2C]">
+                          {/* Moldura wireframe antes da foto aparecer */}
+                          <div className="absolute inset-0 border border-dashed border-[#00D5FF]/30 rounded-lg pointer-events-none"></div>
+                          <img
+                            src={ARCH_IMAGES.hero}
+                            alt="Residência contemporânea Vértice Arquitetura"
+                            style={{
+                              clipPath: `inset(0 ${isReducedMotion ? 0 : archHeroPhotoMask}% 0 0)`,
+                            }}
+                            className="w-full h-full object-cover transition-all duration-75"
+                          />
+                          {!isReducedMotion && archHeroPhotoMask > 2 && archHeroPhotoMask < 98 && (
+                            <div
+                              style={{ right: `${archHeroPhotoMask}%` }}
+                              className="absolute top-0 bottom-0 w-[2px] bg-[#00D5FF] shadow-[0_0_12px_#00D5FF]"
+                            ></div>
+                          )}
+                        </div>
+                      </div>
                     </div>
+
+                    {/* 3. Grid de Obras / Projetos encaixando abaixo */}
+                    <div className="px-4 pb-4 pt-1 grid grid-cols-2 gap-3">
+                      <div
+                        style={{
+                          opacity: isReducedMotion ? 1 : archCard1Opacity,
+                          transform: `translateY(${isReducedMotion ? 0 : archCard1Y}px)`,
+                        }}
+                        className="rounded-lg bg-[#121826] border border-white/10 overflow-hidden flex items-center space-x-2.5 p-2"
+                      >
+                        <img
+                          src={ARCH_IMAGES.card1}
+                          alt="Casa Mirante"
+                          className="w-12 h-11 rounded object-cover flex-shrink-0"
+                        />
+                        <div className="min-w-0">
+                          <div className="text-[11px] font-bold text-white truncate">Casa Mirante</div>
+                          <div className="text-[9px] text-[#D4AF37] truncate">Residencial • 420 m²</div>
+                        </div>
+                      </div>
+
+                      <div
+                        style={{
+                          opacity: isReducedMotion ? 1 : archCard2Opacity,
+                          transform: `translateY(${isReducedMotion ? 0 : archCard2Y}px)`,
+                        }}
+                        className="rounded-lg bg-[#121826] border border-white/10 overflow-hidden flex items-center space-x-2.5 p-2"
+                      >
+                        <img
+                          src={ARCH_IMAGES.card2}
+                          alt="Pavilhão Vidro"
+                          className="w-12 h-11 rounded object-cover flex-shrink-0"
+                        />
+                        <div className="min-w-0">
+                          <div className="text-[11px] font-bold text-white truncate">Pavilhão Vidro</div>
+                          <div className="text-[9px] text-[#D4AF37] truncate">Comercial • 890 m²</div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 )}
 
-                {/* Camada 2B: Modo CELULAR (Mobile Mockup ao vivo) */}
+                {/* MODO CELULAR (Versão Mobile da Landing Page de Arquitetura) */}
                 {stageMode === 'mobile' && (
                   <div className="relative z-10 flex justify-center animate-fadeIn">
-                    <div className="w-[245px] rounded-[28px] bg-[#07111F] border-[5px] border-[#101F35] p-3.5 shadow-2xl space-y-3">
-                      <div className="w-16 h-2.5 bg-black rounded-full mx-auto"></div>
-                      <div className="flex items-center justify-between text-[10px] pt-1">
-                        <span className="font-bold text-white">RydenTec Mobile</span>
-                        <span className="text-emerald-400 font-mono">100% Fluido</span>
+                    <div className="w-[238px] rounded-[28px] bg-[#0D111A] border-[5px] border-[#1A2234] p-3 shadow-2xl space-y-2.5">
+                      <div className="w-16 h-2 bg-black rounded-full mx-auto"></div>
+                      <div className="flex items-center justify-between pt-1 pb-1.5 border-b border-white/10">
+                        <span className="text-[9px] font-bold tracking-[0.18em] text-white">
+                          VÉRTICE <span className="text-[#D4AF37]">ARQ</span>
+                        </span>
+                        <span className="text-[8px] text-white/50 font-mono">MENU ☰</span>
                       </div>
-                      <div className="p-3 rounded-xl bg-gradient-to-br from-[#101F35] to-[#07111F] border border-[#00D5FF]/30 space-y-1.5">
-                        <div className="text-xs font-extrabold text-white leading-tight">
-                          Seu cliente resolve tudo em 1 toque.
-                        </div>
-                        <p className="text-[10px] text-[#A8B5C7]">
-                          Botões ergonômicos, menu ágil e orçamento direto no WhatsApp.
-                        </p>
-                      </div>
-                      <div className="space-y-1.5">
-                        <div className="p-2 rounded-lg bg-[#101F35] border border-white/5 text-[11px] text-white flex justify-between">
-                          <span>Loja Virtual Pix</span>
-                          <span className="text-[#00D5FF]">→</span>
-                        </div>
-                        <div className="p-2 rounded-lg bg-[#101F35] border border-white/5 text-[11px] text-white flex justify-between">
-                          <span>Agendamento Rápido</span>
-                          <span className="text-[#00D5FF]">→</span>
+                      <div className="h-24 rounded-lg overflow-hidden relative">
+                        <img
+                          src={ARCH_IMAGES.hero}
+                          alt="Projeto Arquitetônico Mobile"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-2">
+                          <span className="text-[10px] font-bold text-white leading-tight">
+                            Espaços com luz e propósito.
+                          </span>
                         </div>
                       </div>
-                      <button
-                        onClick={onStartProject}
-                        className="w-full py-2 rounded-xl bg-gradient-to-r from-[#087CFF] to-[#00D5FF] text-white text-[11px] font-bold cursor-pointer"
-                      >
-                        Pedir Orçamento Agora
-                      </button>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <div className="p-1.5 rounded bg-[#141B2B] border border-white/5">
+                          <div className="text-[9px] font-bold text-white">Casa Mirante</div>
+                          <div className="text-[8px] text-[#D4AF37]">420 m²</div>
+                        </div>
+                        <div className="p-1.5 rounded bg-[#141B2B] border border-white/5">
+                          <div className="text-[9px] font-bold text-white">Pavilhão Vidro</div>
+                          <div className="text-[8px] text-[#D4AF37]">890 m²</div>
+                        </div>
+                      </div>
+                      <span className="block text-center w-full py-1.5 rounded bg-[#D4AF37] text-[#090D16] text-[10px] font-bold">
+                        Agendar Reunião
+                      </span>
                     </div>
                   </div>
                 )}
 
-                {/* Camada 2C: Modo CÓDIGO (Engenharia RydenTec) */}
+                {/* MODO CÓDIGO */}
                 {stageMode === 'code' && (
                   <div className="relative z-10 rounded-xl bg-[#050C16] border border-white/10 p-4 font-mono text-[11px] leading-relaxed text-[#A8B5C7] space-y-1.5 animate-fadeIn">
                     <div className="text-[#00D5FF] font-semibold mb-2">
-                      // rydentec-engine.config.ts
+                      // VerticeArquitetura.jsx — Montagem em Tempo Real
                     </div>
                     <div>
-                      <span className="text-purple-400">export const</span>{' '}
-                      <span className="text-white">projeto</span> = {'{'}
+                      <span className="text-purple-400">export default function</span>{' '}
+                      <span className="text-white">VerticeLanding</span>() {'{'}
                     </div>
                     <div className="pl-4">
-                      stack: <span className="text-emerald-400">&apos;React 18 + Tailwind + API Rápida&apos;</span>,
+                      <span className="text-purple-400">return</span> (
                     </div>
-                    <div className="pl-4">
-                      performance: <span className="text-[#00D5FF]">99</span>,
-                    </div>
-                    <div className="pl-4">
-                      mobileFirst: <span className="text-amber-300">true</span>,
-                    </div>
-                    <div className="pl-4">
-                      seoGoogle: <span className="text-emerald-400">&apos;Schema.org + Sitemap + GZIP&apos;</span>,
-                    </div>
-                    <div className="pl-4">
-                      conversao: <span className="text-emerald-400">&apos;WhatsApp +55 (34) 99872-1299&apos;</span>,
-                    </div>
-                    <div>{'}'};</div>
+                    <div className="pl-8 text-emerald-400">&lt;Header brand=&quot;Vértice Arq&quot; /&gt;</div>
+                    <div className="pl-8 text-[#00D5FF]">&lt;HeroEditorial layout=&quot;split-grid&quot; /&gt;</div>
+                    <div className="pl-8 text-amber-300">&lt;ObrasDestaque items=&#123;[&apos;Casa Mirante&apos;, &apos;Pavilhão Vidro&apos;]&#125; /&gt;</div>
+                    <div className="pl-8 text-emerald-400">&lt;WhatsAppCTA phone=&quot;+5534998721299&quot; /&gt;</div>
+                    <div className="pl-4">);</div>
+                    <div>{'}'}</div>
                     <div className="pt-3 text-[10px] text-emerald-400 flex items-center space-x-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      <span>Build pronto para produção e alta escala</span>
+                      <span>Landing page compilada com carregamento &lt; 0.6s</span>
                     </div>
+                  </div>
+                )}
+
+                {/* MODO BLUEPRINT */}
+                {stageMode === 'blueprint' && (
+                  <div className="relative z-10 rounded-xl border border-[#00D5FF]/30 bg-[#07111F] p-3 animate-fadeIn">
+                    <svg className="w-full h-[270px]" viewBox="0 0 480 280" fill="none">
+                      <defs>
+                        <pattern id="arch-bp-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#00D5FF" strokeWidth="0.4" strokeOpacity="0.25" />
+                        </pattern>
+                      </defs>
+                      <rect width="480" height="280" fill="url(#arch-bp-grid)" />
+                      <rect x="10" y="10" width="460" height="260" rx="10" stroke="#00D5FF" strokeWidth="1.2" strokeDasharray="6 4" strokeOpacity="0.6" />
+                      <rect x="24" y="22" width="432" height="26" rx="4" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.7" />
+                      <rect x="24" y="64" width="200" height="20" rx="4" stroke="#00D5FF" strokeWidth="1.2" strokeOpacity="0.8" />
+                      <rect x="24" y="94" width="170" height="12" rx="3" stroke="#087CFF" strokeWidth="1" strokeOpacity="0.5" />
+                      <rect x="24" y="120" width="110" height="28" rx="6" stroke="#D4AF37" strokeWidth="1.2" strokeOpacity="0.85" />
+                      <rect x="240" y="64" width="216" height="110" rx="8" stroke="#00D5FF" strokeWidth="1.2" strokeDasharray="5 3" strokeOpacity="0.75" />
+                      <line x1="240" y1="64" x2="456" y2="174" stroke="#00D5FF" strokeWidth="0.8" strokeOpacity="0.3" />
+                      <line x1="456" y1="64" x2="240" y2="174" stroke="#00D5FF" strokeWidth="0.8" strokeOpacity="0.3" />
+                      <rect x="24" y="192" width="210" height="60" rx="6" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.6" />
+                      <rect x="246" y="192" width="210" height="60" rx="6" stroke="#00D5FF" strokeWidth="1" strokeOpacity="0.6" />
+                      <text x="24" y="266" fill="#00D5FF" fontSize="9" fontFamily="monospace" opacity="0.8">
+                        VERTICE_ARQ // WIREFRAME_GRID_12COL
+                      </text>
+                    </svg>
                   </div>
                 )}
 
                 {/* Rodapé fixo do palco */}
-                <div className="flex items-center justify-between gap-3 pt-4 mt-2 border-t border-white/10 relative z-10">
+                <div className="flex items-center justify-between gap-3 pt-3.5 mt-2 border-t border-white/10 relative z-10">
                   <button
                     onClick={() => {
                       if (onExploreShowcase) onExploreShowcase();
@@ -665,6 +717,7 @@ export default function Hero({ onStartProject, onExploreServices, onExploreShowc
                     <span className="text-[11px] font-semibold text-white">100% Mobile Ready</span>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
